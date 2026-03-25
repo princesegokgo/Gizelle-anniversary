@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>One Month with Gizzele 🌹</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg:       #0d0608;
+  --surface:  #1a0b10;
+  --card:     #22101a;
+  --border:   #4a2035;
+  --rose:     #c94f6a;
+  --rose-lt:  #e8809a;
+  --gold:     #c9973a;
+  --gold-lt:  #f0d28a;
+  --cream:    #f5e8d8;
+  --muted:    #9a7080;
+  --text:     #f0dde4;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Cormorant Garamond',serif;
+  overflow-x:hidden;
+  min-height:100vh;
+}
+
+/* ── CANVAS ── */
+#petals{position:fixed;inset:0;pointer-events:none;z-index:0;}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;
+  z-index:100;
+  display:flex;justify-content:center;gap:0.5rem;
+  padding:0.8rem 1rem;
+  background:rgba(13,6,8,0.85);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(201,79,106,0.2);
+  flex-wrap:wrap;
+}
+.nav-btn{
+  background:none;border:1px solid transparent;
+  color:var(--muted);
+  font-family:'Cormorant Garamond',serif;
+  font-size:0.9rem;letter-spacing:0.08em;
+  padding:0.35rem 0.9rem;border-radius:50px;
+  cursor:pointer;transition:all 0.2s;text-transform:uppercase;
+}
+.nav-btn:hover,.nav-btn.active{
+  color:var(--rose-lt);border-color:var(--rose);
+}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;padding:2rem;
+  position:relative;z-index:1;
+  background:radial-gradient(ellipse 70% 60% at 50% 50%, rgba(201,79,106,0.12) 0%, transparent 70%);
+}
+.hero-eyebrow{
+  font-family:'Dancing Script',cursive;
+  font-size:1.3rem;color:var(--gold);
+  opacity:0;animation:fadeUp 0.8s ease 0.3s forwards;
+}
+.hero-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(3.5rem,11vw,8rem);
+  font-weight:700;line-height:0.95;
+  letter-spacing:-0.02em;
+  color:var(--cream);
+  opacity:0;animation:fadeUp 0.9s ease 0.6s forwards;
+}
+.hero-title em{font-style:italic;color:var(--rose-lt);}
+.hero-sub{
+  font-size:clamp(1rem,2.5vw,1.5rem);
+  font-style:italic;color:var(--muted);
+  margin-top:1.2rem;
+  opacity:0;animation:fadeUp 0.9s ease 0.9s forwards;
+}
+.hero-heart{
+  margin-top:2.5rem;font-size:4rem;
+  background:none;border:none;cursor:pointer;
+  display:inline-block;
+  opacity:0;animation:fadeUp 0.9s ease 1.2s forwards;
+  transition:transform 0.15s;
+  filter:drop-shadow(0 0 20px rgba(201,79,106,0.6));
+}
+.hero-heart:hover{transform:scale(1.3) rotate(-8deg);}
+.hero-hint{
+  font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--muted);margin-top:0.5rem;
+  opacity:0;animation:fadeUp 0.8s ease 1.5s forwards;
+}
+.scroll-cue{
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  color:var(--muted);font-size:1.6rem;
+  animation:bob 2.2s ease-in-out infinite;text-decoration:none;
+}
+
+/* ── SECTIONS ── */
+.page-section{
+  position:relative;z-index:1;
+  max-width:960px;margin:0 auto;
+  padding:6rem 1.5rem;
+}
+.sec-label{
+  font-family:'Dancing Script',cursive;
+  font-size:1.1rem;color:var(--gold);
+  display:block;margin-bottom:0.5rem;
+}
+.sec-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,5vw,3rem);
+  font-weight:700;color:var(--cream);
+  line-height:1.15;
+}
+.divider{
+  width:60px;height:2px;
+  background:linear-gradient(90deg,var(--rose),var(--gold-lt));
+  margin:1.2rem 0 2rem;border-radius:2px;
+}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s,transform 0.7s;}
+.reveal.visible{opacity:1;transform:none;}
+
+/* ─────────────────────────────── */
+/* PHOTO GALLERY                  */
+/* ─────────────────────────────── */
+.gallery-controls{
+  display:flex;gap:1rem;align-items:center;flex-wrap:wrap;
+  margin-bottom:1.5rem;
+}
+.upload-btn{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  padding:0.7rem 1.5rem;
+  background:linear-gradient(135deg,var(--rose),#a33554);
+  color:#fff;border:none;border-radius:50px;
+  font-family:'Cormorant Garamond',serif;
+  font-size:1rem;cursor:pointer;
+  transition:opacity 0.2s,transform 0.15s;
+  font-weight:600;letter-spacing:0.04em;
+}
+.upload-btn:hover{opacity:0.85;transform:scale(1.03);}
+#photoFileInput{display:none;}
+
+.photo-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:1rem;
+}
+.photo-card{
+  position:relative;border-radius:16px;overflow:hidden;
+  border:1.5px solid var(--border);
+  background:var(--card);
+  cursor:pointer;
+  transition:transform 0.3s,box-shadow 0.3s;
+  animation:popIn 0.4s ease;
+}
+.photo-card:hover{transform:scale(1.03);box-shadow:0 12px 40px rgba(201,79,106,0.25);}
+.photo-card img{width:100%;height:200px;object-fit:cover;display:block;}
+.photo-caption{
+  padding:0.8rem 1rem;
+  font-style:italic;font-size:0.9rem;color:var(--muted);
+}
+.photo-caption strong{color:var(--rose-lt);font-style:normal;font-size:0.8rem;display:block;margin-bottom:0.2rem;}
+.photo-del{
+  position:absolute;top:0.5rem;right:0.5rem;
+  background:rgba(0,0,0,0.6);border:none;
+  color:#fff;width:26px;height:26px;border-radius:50%;
+  font-size:0.75rem;cursor:pointer;
+  opacity:0;transition:opacity 0.2s;
+}
+.photo-card:hover .photo-del{opacity:1;}
+
+/* UPLOAD MODAL */
+.modal-overlay{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,0.75);
+  backdrop-filter:blur(6px);
+  z-index:200;
+  display:flex;align-items:center;justify-content:center;
+  padding:1rem;
+  opacity:0;pointer-events:none;transition:opacity 0.3s;
+}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal{
+  background:var(--surface);
+  border:1.5px solid var(--border);
+  border-radius:20px;
+  padding:2rem;
+  max-width:480px;width:100%;
+  transform:translateY(20px);transition:transform 0.3s;
+  position:relative;
+}
+.modal-overlay.open .modal{transform:none;}
+.modal h3{
+  font-family:'Playfair Display',serif;
+  font-size:1.5rem;color:var(--cream);
+  margin-bottom:1.2rem;
+}
+.modal-close{
+  position:absolute;top:1rem;right:1rem;
+  background:none;border:none;color:var(--muted);
+  font-size:1.2rem;cursor:pointer;
+}
+.modal-preview{
+  width:100%;height:180px;
+  border-radius:12px;object-fit:cover;
+  border:1.5px solid var(--border);
+  margin-bottom:1rem;
+  display:none;
+}
+.modal-preview.show{display:block;}
+
+/* ─────────────────────────────── */
+/* STORIES                        */
+/* ─────────────────────────────── */
+.story-form{
+  background:var(--surface);
+  border:1.5px solid var(--border);
+  border-radius:20px;
+  padding:1.8rem;
+  margin-bottom:2rem;
+}
+.story-form h3{
+  font-family:'Playfair Display',serif;
+  font-size:1.3rem;color:var(--cream);
+  margin-bottom:1.2rem;font-style:italic;
+}
+.form-row{display:flex;flex-direction:column;gap:0.8rem;}
+.form-field{
+  width:100%;padding:0.85rem 1rem;
+  background:var(--card);
+  border:1.5px solid var(--border);
+  border-radius:12px;
+  color:var(--text);
+  font-family:'Cormorant Garamond',serif;
+  font-size:1rem;outline:none;
+  transition:border-color 0.2s;
+}
+.form-field:focus{border-color:var(--rose);}
+textarea.form-field{resize:vertical;min-height:100px;}
+.who-toggle{
+  display:flex;gap:0.5rem;
+}
+.who-btn{
+  flex:1;padding:0.5rem;
+  background:var(--card);
+  border:1.5px solid var(--border);
+  color:var(--muted);
+  border-radius:8px;cursor:pointer;
+  font-family:'Cormorant Garamond',serif;
+  font-size:0.95rem;transition:all 0.2s;
+}
+.who-btn.active{background:var(--rose);border-color:var(--rose);color:#fff;}
+
+.submit-btn{
+  padding:0.8rem 2rem;
+  background:linear-gradient(135deg,var(--gold),#a07010);
+  color:#fff;border:none;border-radius:50px;
+  font-family:'Cormorant Garamond',serif;
+  font-size:1rem;font-weight:600;
+  cursor:pointer;letter-spacing:0.05em;
+  transition:opacity 0.2s,transform 0.15s;
+  margin-top:0.5rem;align-self:flex-start;
+}
+.submit-btn:hover{opacity:0.85;transform:scale(1.03);}
+
+.story-list{display:flex;flex-direction:column;gap:1.5rem;}
+.story-card{
+  background:var(--surface);
+  border:1.5px solid var(--border);
+  border-radius:18px;
+  padding:1.6rem;
+  animation:popIn 0.4s ease;
+  position:relative;
+}
+.story-card.by-her{border-left:3px solid var(--rose);}
+.story-card.by-him{border-left:3px solid var(--gold);}
+.story-meta{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:0.8rem;flex-wrap:wrap;gap:0.5rem;
+}
+.story-author{
+  font-family:'Dancing Script',cursive;
+  font-size:1.1rem;
+}
+.story-author.her{color:var(--rose-lt);}
+.story-author.him{color:var(--gold-lt);}
+.story-date{font-size:0.8rem;color:var(--muted);letter-spacing:0.05em;}
+.story-title-disp{
+  font-family:'Playfair Display',serif;
+  font-size:1.2rem;color:var(--cream);
+  font-style:italic;margin-bottom:0.6rem;
+}
+.story-body{
+  font-size:1rem;line-height:1.8;
+  color:var(--text);
+}
+.story-del{
+  position:absolute;top:1rem;right:1rem;
+  background:none;border:none;
+  color:var(--muted);cursor:pointer;font-size:0.9rem;
+  transition:color 0.2s;
+}
+.story-del:hover{color:var(--rose);}
+.story-like{
+  margin-top:1rem;background:none;border:none;
+  color:var(--muted);cursor:pointer;
+  font-family:'Cormorant Garamond',serif;
+  font-size:0.9rem;letter-spacing:0.05em;
+  transition:color 0.2s;display:inline-flex;align-items:center;gap:0.3rem;
+}
+.story-like:hover,.story-like.liked{color:var(--rose-lt);}
+
+/* ─────────────────────────────── */
+/* POEMS                          */
+/* ─────────────────────────────── */
+.poem-list{display:flex;flex-direction:column;gap:1.5rem;}
+.poem-card{
+  background:var(--surface);
+  border:1.5px solid var(--border);
+  border-radius:18px;
+  padding:2rem 2.2rem;
+  animation:popIn 0.4s ease;
+  position:relative;
+  text-align:center;
+}
+.poem-card::before{
+  content:'"';
+  font-family:'Playfair Display',serif;
+  font-size:6rem;line-height:0.6;
+  color:var(--rose);opacity:0.1;
+  position:absolute;top:1.2rem;left:1.2rem;
+  pointer-events:none;
+}
+.poem-author-tag{
+  font-family:'Dancing Script',cursive;
+  font-size:1rem;margin-bottom:0.5rem;
+  display:block;
+}
+.poem-author-tag.her{color:var(--rose-lt);}
+.poem-author-tag.him{color:var(--gold-lt);}
+.poem-title-disp{
+  font-family:'Playfair Display',serif;
+  font-size:1.4rem;font-style:italic;
+  color:var(--cream);margin-bottom:1rem;
+}
+.poem-body{
+  font-size:1.1rem;line-height:2;
+  color:var(--text);font-style:italic;
+  white-space:pre-line;
+}
+.poem-del{
+  position:absolute;top:1rem;right:1rem;
+  background:none;border:none;
+  color:var(--muted);cursor:pointer;font-size:0.9rem;
+  transition:color 0.2s;
+}
+.poem-del:hover{color:var(--rose);}
+
+/* ─────────────────────────────── */
+/* LIGHTBOX                       */
+/* ─────────────────────────────── */
+.lightbox{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,0.92);
+  z-index:300;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity 0.3s;
+  padding:1rem;
+}
+.lightbox.open{opacity:1;pointer-events:all;}
+.lightbox img{
+  max-width:90vw;max-height:80vh;
+  border-radius:16px;object-fit:contain;
+  border:2px solid var(--border);
+}
+.lb-caption{
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  color:var(--muted);font-style:italic;font-size:1rem;
+  text-align:center;max-width:500px;
+}
+.lb-close{
+  position:absolute;top:1.5rem;right:1.5rem;
+  background:none;border:none;color:#fff;
+  font-size:1.8rem;cursor:pointer;opacity:0.7;
+  transition:opacity 0.2s;
+}
+.lb-close:hover{opacity:1;}
+
+/* ─────────────────────────────── */
+/* LETTER SECTION                 */
+/* ─────────────────────────────── */
+.letter-card{
+  background:var(--surface);
+  border:1.5px solid var(--border);
+  border-radius:20px;
+  padding:3rem;
+  position:relative;
+  box-shadow:0 8px 40px rgba(0,0,0,0.4);
+}
+.letter-card::before{
+  content:'✉';
+  position:absolute;top:-1rem;left:50%;transform:translateX(-50%);
+  font-size:1.8rem;background:var(--bg);padding:0 0.6rem;
+}
+.letter-text{
+  font-size:clamp(1.05rem,2vw,1.2rem);
+  line-height:2;color:var(--text);font-style:italic;
+}
+.letter-sig{
+  margin-top:2rem;text-align:right;
+  font-family:'Dancing Script',cursive;
+  font-size:1.8rem;color:var(--rose-lt);
+}
+
+/* ─────────────────────────────── */
+/* FLOATING HEARTS                */
+/* ─────────────────────────────── */
+.fheart{
+  position:fixed;pointer-events:none;z-index:999;
+  font-size:1.4rem;
+  animation:floatUp 1.4s ease forwards;
+}
+
+/* ─────────────────────────────── */
+/* EMPTY STATE                    */
+/* ─────────────────────────────── */
+.empty-state{
+  text-align:center;padding:3rem;
+  color:var(--muted);font-style:italic;
+  border:1.5px dashed var(--border);
+  border-radius:16px;font-size:1.05rem;
+}
+
+/* ─────────────────────────────── */
+/* TOAST                          */
+/* ─────────────────────────────── */
+.toast{
+  position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(20px);
+  background:var(--rose);color:#fff;
+  padding:0.7rem 1.5rem;border-radius:50px;
+  font-family:'Dancing Script',cursive;font-size:1.1rem;
+  z-index:500;opacity:0;transition:all 0.3s;pointer-events:none;
+  white-space:nowrap;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ─────────────────────────────── */
+/* FOOTER                         */
+/* ─────────────────────────────── */
+footer{
+  text-align:center;padding:4rem 2rem 3rem;
+  position:relative;z-index:1;
+  font-family:'Dancing Script',cursive;
+  font-size:1.6rem;color:var(--muted);
+}
+footer span{color:var(--rose-lt);}
+
+/* ─────────────────────────────── */
+/* KEYFRAMES                      */
+/* ─────────────────────────────── */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(24px);}
+  to{opacity:1;transform:none;}
+}
+@keyframes bob{
+  0%,100%{transform:translateX(-50%) translateY(0);}
+  50%{transform:translateX(-50%) translateY(8px);}
+}
+@keyframes floatUp{
+  0%{opacity:1;transform:translateY(0) scale(1);}
+  100%{opacity:0;transform:translateY(-90px) scale(1.8);}
+}
+@keyframes popIn{
+  from{opacity:0;transform:scale(0.88);}
+  to{opacity:1;transform:scale(1);}
+}
+@keyframes shimmer{
+  0%{background-position:-200% 0;}
+  100%{background-position:200% 0;}
+}
+
+/* ─────────────────────────────── */
+/* RESPONSIVE                     */
+/* ─────────────────────────────── */
+@media(max-width:600px){
+  .photo-grid{grid-template-columns:repeat(2,1fr);}
+  .letter-card{padding:2rem 1.2rem;}
+}
+</style>
+</head>
+<body>
+
+<canvas id="petals"></canvas>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- NAV -->
+<nav>
+  <button class="nav-btn active" onclick="scrollTo('home')">🌹 Home</button>
+  <button class="nav-btn" onclick="scrollTo('photos')">📸 Photos</button>
+  <button class="nav-btn" onclick="scrollTo('stories')">📖 Stories</button>
+  <button class="nav-btn" onclick="scrollTo('poems')">✍️ Poems</button>
+  <button class="nav-btn" onclick="scrollTo('letter')">💌 Letter</button>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<div class="hero" id="home">
+  <span class="hero-eyebrow">✨ one whole month ✨</span>
+  <h1 class="hero-title">For <em>Gizzele</em>,<br>with love.</h1>
+  <p class="hero-sub">30 days of the most beautiful kind of magic 🌹</p>
+  <button class="hero-heart" id="mainHeart">💖</button>
+  <p class="hero-hint">tap the heart</p>
+  <a class="scroll-cue" href="#photos-sec">↓</a>
+</div>
+
+<!-- ═══ PHOTOS ═══ -->
+<section class="page-section reveal" id="photos-sec">
+  <span class="sec-label">our moments</span>
+  <h2 class="sec-title">Our Photo Gallery</h2>
+  <div class="divider"></div>
+
+  <div class="gallery-controls">
+    <button class="upload-btn" id="openUploadBtn">📸 Add a Photo</button>
+    <span style="color:var(--muted);font-style:italic;font-size:0.95rem;">Every picture tells our story ✨</span>
+  </div>
+
+  <div class="photo-grid" id="photoGrid">
+    <div class="empty-state" id="photoEmpty">
+      No photos yet — add your first memory together! 🌹
+    </div>
+  </div>
+</section>
+
+<!-- ═══ STORIES ═══ -->
+<section class="page-section reveal" id="stories-sec">
+  <span class="sec-label">write it down</span>
+  <h2 class="sec-title">Memorable Stories</h2>
+  <div class="divider"></div>
+
+  <div class="story-form">
+    <h3>Share a memory…</h3>
+    <div class="form-row">
+      <div>
+        <p style="font-size:0.85rem;color:var(--muted);margin-bottom:0.4rem;letter-spacing:0.08em;text-transform:uppercase;">Who is writing?</p>
+        <div class="who-toggle">
+          <button class="who-btn active" id="storyHimBtn" onclick="setWho('story','him')">💛 Him</button>
+          <button class="who-btn" id="storyHerBtn" onclick="setWho('story','her')">🌹 Gizzele</button>
+        </div>
+      </div>
+      <input class="form-field" id="storyTitle" placeholder="Give this memory a title…" maxlength="80"/>
+      <input class="form-field" id="storyDate" type="date"/>
+      <textarea class="form-field" id="storyBody" placeholder="Tell the story… What happened? How did it feel? Why will you never forget it?" rows="5"></textarea>
+      <button class="submit-btn" onclick="addStory()">Post Memory ✨</button>
+    </div>
+  </div>
+
+  <div class="story-list" id="storyList">
+    <div class="empty-state" id="storyEmpty">
+      No stories yet — write your first one! 📖
+    </div>
+  </div>
+</section>
+
+<!-- ═══ POEMS ═══ -->
+<section class="page-section reveal" id="poems-sec">
+  <span class="sec-label">from the heart</span>
+  <h2 class="sec-title">Poems & Love Notes</h2>
+  <div class="divider"></div>
+
+  <div class="story-form">
+    <h3>Write a poem…</h3>
+    <div class="form-row">
+      <div>
+        <p style="font-size:0.85rem;color:var(--muted);margin-bottom:0.4rem;letter-spacing:0.08em;text-transform:uppercase;">Who is writing?</p>
+        <div class="who-toggle">
+          <button class="who-btn active" id="poemHimBtn" onclick="setWho('poem','him')">💛 Him</button>
+          <button class="who-btn" id="poemHerBtn" onclick="setWho('poem','her')">🌹 Gizzele</button>
+        </div>
+      </div>
+      <input class="form-field" id="poemTitle" placeholder="Title of your poem…" maxlength="80"/>
+      <textarea class="form-field" id="poemBody" placeholder="Write your poem here…&#10;Each line on its own row.&#10;&#10;Let your heart speak freely. 🌹" rows="8" style="white-space:pre;font-style:italic;line-height:2;"></textarea>
+      <button class="submit-btn" onclick="addPoem()">Publish Poem 🌹</button>
+    </div>
+  </div>
+
+  <div class="poem-list" id="poemList">
+    <div class="empty-state" id="poemEmpty">
+      No poems yet — write the first verse! ✍️
+    </div>
+  </div>
+</section>
+
+<!-- ═══ LETTER ═══ -->
+<section class="page-section reveal" id="letter-sec">
+  <span class="sec-label">from me to you</span>
+  <h2 class="sec-title">A Letter for Gizzele</h2>
+  <div class="divider"></div>
+  <div class="letter-card">
+    <p class="letter-text">
+      My dearest Gizelle,<br><br>
+     I won’t pretend our story has been simple. We’ve known what it feels like to lose each other, to walk separate paths, and to carry the weight of things that once hurt us. But somehow, here we are again… choosing each other, and that choice means more to me than anything easy ever could.
+
+Gizelle, these past thirty days have been something I can’t quite put into perfect words , but I’ll try lol 
+
+You’ve brought a kind of warmth into my life that I didn’t even realize I had missed so deeply. It’s in the way you laugh, the way you speak, the little moments when you don’t even try to be special but somehow are. Being with you again doesn’t feel like starting over… it feels like finding something that was always meant to be, just waiting for the right time.
+
+These days with you have reminded me how beautiful simple things can be. Talking with you, spending time together, even silence feels different  like it actually means something. Like it’s ours.
+
+This isn’t just about a month. It’s about a second chance that I don’t take lightly. It’s about rebuilding something stronger, more honest, more intentional.
+
+And if this is only the beginning… then I’m ready to turn every page with you, slowly, carefully, making sure this story is one we’re both proud of.
+
+I’m here, Gizelle. Not just for now but for what we’re building.
+
+Happy one month to us 
+
+    </p>
+    <div class="letter-sig">Forever yours 🌹</div>
+  </div>
+</section>
+
+<footer id="letter">
+  Made with <span>♥</span> for the most wonderful month of my life.
+</footer>
+
+<!-- ═══ UPLOAD MODAL ═══ -->
+<div class="modal-overlay" id="uploadModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h3>📸 Add a Memory</h3>
+    <img class="modal-preview" id="modalPreview" src="" alt="Preview"/>
+    <div class="form-row">
+      <div>
+        <p style="font-size:0.85rem;color:var(--muted);margin-bottom:0.4rem;letter-spacing:0.08em;text-transform:uppercase;">Who is adding?</p>
+        <div class="who-toggle">
+          <button class="who-btn active" id="photoHimBtn" onclick="setWho('photo','him')">💛 Him</button>
+          <button class="who-btn" id="photoHerBtn" onclick="setWho('photo','her')">🌹 Gizzele</button>
+        </div>
+      </div>
+      <button class="upload-btn" onclick="document.getElementById('photoFileInput').click()">Choose Photo</button>
+      <input type="file" id="photoFileInput" accept="image/*"/>
+      <input class="form-field" id="photoCaptionInput" placeholder="Write a caption… what made this moment special?" maxlength="120"/>
+      <button class="submit-btn" onclick="savePhoto()">Add to Gallery ✨</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ LIGHTBOX ═══ -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lb-close">✕</button>
+  <img id="lbImg" src="" alt=""/>
+  <div class="lb-caption" id="lbCaption"></div>
+</div>
+
+<script>
+// ─── STATE ────────────────────────────────────────────────────
+const STORAGE_KEY = 'gizzele_anniversary_v1';
+
+function loadData(){
+  try{ return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {photos:[],stories:[],poems:[]}; }
+  catch{ return {photos:[],stories:[],poems:[]}; }
+}
+function saveData(d){ localStorage.setItem(STORAGE_KEY, JSON.stringify(d)); }
+
+let state = loadData();
+let currentPhotoDataURL = null;
+let storyWho = 'him';
+let poemWho  = 'him';
+let photoWho = 'him';
+
+// ─── NAVIGATION ───────────────────────────────────────────────
+function scrollTo(id){
+  const map = {home:'home','photos':'photos-sec',stories:'stories-sec',poems:'poems-sec',letter:'letter-sec'};
+  const el = document.getElementById(map[id]||id);
+  if(el) el.scrollIntoView({behavior:'smooth'});
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+// ─── WHO TOGGLE ───────────────────────────────────────────────
+function setWho(section, who){
+  if(section==='story'){ storyWho=who;
+    document.getElementById('storyHimBtn').classList.toggle('active',who==='him');
+    document.getElementById('storyHerBtn').classList.toggle('active',who==='her');
+  }
+  if(section==='poem'){ poemWho=who;
+    document.getElementById('poemHimBtn').classList.toggle('active',who==='him');
+    document.getElementById('poemHerBtn').classList.toggle('active',who==='her');
+  }
+  if(section==='photo'){ photoWho=who;
+    document.getElementById('photoHimBtn').classList.toggle('active',who==='him');
+    document.getElementById('photoHerBtn').classList.toggle('active',who==='her');
+  }
+}
+
+// ─── TOAST ────────────────────────────────────────────────────
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
+}
+
+// ─── PHOTOS ───────────────────────────────────────────────────
+document.getElementById('openUploadBtn').onclick = ()=>{
+  document.getElementById('uploadModal').classList.add('open');
+};
+function closeModal(){
+  document.getElementById('uploadModal').classList.remove('open');
+  currentPhotoDataURL=null;
+  document.getElementById('modalPreview').classList.remove('show');
+  document.getElementById('photoCaptionInput').value='';
+}
+document.getElementById('photoFileInput').addEventListener('change', e=>{
+  const file = e.target.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ev=>{
+    currentPhotoDataURL = ev.target.result;
+    const prev = document.getElementById('modalPreview');
+    prev.src = currentPhotoDataURL; prev.classList.add('show');
+  };
+  reader.readAsDataURL(file);
+});
+function savePhoto(){
+  if(!currentPhotoDataURL){ showToast('Please choose a photo first! 📸'); return; }
+  const caption = document.getElementById('photoCaptionInput').value.trim();
+  const photo = {
+    id: Date.now(),
+    src: currentPhotoDataURL,
+    caption, who: photoWho,
+    date: new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})
+  };
+  state.photos.unshift(photo); saveData(state);
+  renderPhotos(); closeModal();
+  showToast('Photo added! 📸✨');
+  document.getElementById('photoFileInput').value='';
+  spawnConfetti();
+}
+
+function renderPhotos(){
+  const grid = document.getElementById('photoGrid');
+  const empty = document.getElementById('photoEmpty');
+  if(!state.photos.length){ grid.innerHTML=''; grid.appendChild(empty); return; }
+  grid.innerHTML='';
+  state.photos.forEach(p=>{
+    const card = document.createElement('div');
+    card.className='photo-card';
+    card.innerHTML=`
+      <img src="${p.src}" alt="${p.caption||''}" loading="lazy"/>
+      <div class="photo-caption">
+        <strong>${p.who==='her'?'🌹 Gizzele':'💛 Him'} · ${p.date||''}</strong>
+        ${p.caption?p.caption:''}
+      </div>
+      <button class="photo-del" onclick="deletePhoto(${p.id},event)" title="Remove">✕</button>
+    `;
+    card.querySelector('img').addEventListener('click',()=>openLightbox(p.src, p.caption));
+    grid.appendChild(card);
+  });
+}
+function deletePhoto(id,e){
+  e.stopPropagation();
+  if(!confirm('Remove this photo?')) return;
+  state.photos = state.photos.filter(p=>p.id!==id);
+  saveData(state); renderPhotos();
+}
+
+// ─── LIGHTBOX ────────────────────────────────────────────────
+function openLightbox(src, caption){
+  document.getElementById('lbImg').src=src;
+  document.getElementById('lbCaption').textContent=caption||'';
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLightbox(){ document.getElementById('lightbox').classList.remove('open'); }
+
+// ─── STORIES ─────────────────────────────────────────────────
+function addStory(){
+  const title = document.getElementById('storyTitle').value.trim();
+  const body  = document.getElementById('storyBody').value.trim();
+  const date  = document.getElementById('storyDate').value;
+  if(!title||!body){ showToast('Please fill in the title and story! 📖'); return; }
+  const story = {
+    id:Date.now(), title, body, who:storyWho,
+    date: date ? new Date(date).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})
+               : new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}),
+    likes:0, liked:false
+  };
+  state.stories.unshift(story); saveData(state); renderStories();
+  document.getElementById('storyTitle').value='';
+  document.getElementById('storyBody').value='';
+  document.getElementById('storyDate').value='';
+  showToast('Memory saved! 💖');
+  spawnConfetti();
+}
+function renderStories(){
+  const list  = document.getElementById('storyList');
+  const empty = document.getElementById('storyEmpty');
+  if(!state.stories.length){ list.innerHTML=''; list.appendChild(empty); return; }
+  list.innerHTML='';
+  state.stories.forEach(s=>{
+    const card = document.createElement('div');
+    card.className=`story-card by-${s.who}`;
+    card.innerHTML=`
+      <div class="story-meta">
+        <span class="story-author ${s.who}">${s.who==='her'?'🌹 Gizzele':'💛 Him'}</span>
+        <span class="story-date">${s.date}</span>
+      </div>
+      <div class="story-title-disp">${s.title}</div>
+      <div class="story-body">${s.body.replace(/\n/g,'<br>')}</div>
+      <button class="story-like ${s.liked?'liked':''}" onclick="likeStory(${s.id})">
+        ${s.liked?'❤️':'🤍'} ${s.likes} ${s.likes===1?'heart':'hearts'}
+      </button>
+      <button class="story-del" onclick="deleteStory(${s.id})" title="Delete">✕</button>
+    `;
+    list.appendChild(card);
+  });
+}
+function likeStory(id){
+  const s = state.stories.find(x=>x.id===id); if(!s) return;
+  s.liked=!s.liked; s.likes+=s.liked?1:-1;
+  saveData(state); renderStories();
+  if(s.liked) spawnHearts(event.clientX,event.clientY);
+}
+function deleteStory(id){
+  if(!confirm('Delete this story?')) return;
+  state.stories=state.stories.filter(s=>s.id!==id);
+  saveData(state); renderStories();
+}
+
+// ─── POEMS ───────────────────────────────────────────────────
+function addPoem(){
+  const title = document.getElementById('poemTitle').value.trim();
+  const body  = document.getElementById('poemBody').value.trim();
+  if(!title||!body){ showToast('Please write a title and poem! ✍️'); return; }
+  const poem = {
+    id:Date.now(), title, body, who:poemWho,
+    date: new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})
+  };
+  state.poems.unshift(poem); saveData(state); renderPoems();
+  document.getElementById('poemTitle').value='';
+  document.getElementById('poemBody').value='';
+  showToast('Poem published! 🌹');
+  spawnConfetti();
+}
+function renderPoems(){
+  const list  = document.getElementById('poemList');
+  const empty = document.getElementById('poemEmpty');
+  if(!state.poems.length){ list.innerHTML=''; list.appendChild(empty); return; }
+  list.innerHTML='';
+  state.poems.forEach(p=>{
+    const card = document.createElement('div');
+    card.className='poem-card';
+    card.innerHTML=`
+      <span class="poem-author-tag ${p.who}">${p.who==='her'?'🌹 Gizzele':'💛 Him'} · ${p.date}</span>
+      <div class="poem-title-disp">${p.title}</div>
+      <div class="poem-body">${p.body}</div>
+      <button class="poem-del" onclick="deletePoem(${p.id})" title="Delete">✕</button>
+    `;
+    list.appendChild(card);
+  });
+}
+function deletePoem(id){
+  if(!confirm('Delete this poem?')) return;
+  state.poems=state.poems.filter(p=>p.id!==id);
+  saveData(state); renderPoems();
+}
+
+// ─── HEART BURST ─────────────────────────────────────────────
+document.getElementById('mainHeart').addEventListener('click', function(e){
+  this.style.animation='none';
+  void this.offsetWidth;
+  this.style.animation='';
+  for(let i=0;i<12;i++) spawnHeart(e.clientX+((Math.random()-0.5)*40), e.clientY+((Math.random()-0.5)*40));
+  spawnConfetti();
+});
+
+document.addEventListener('click', e=>{
+  const el=e.target;
+  if(el.closest('.hero')||el.id==='mainHeart') return;
+  if(Math.random()<0.3) spawnHeart(e.clientX,e.clientY);
+});
+
+function spawnHeart(x,y){
+  const h=document.createElement('div');h.className='fheart';
+  h.textContent=['💖','💕','🌹','✨','💗'][Math.floor(Math.random()*5)];
+  h.style.cssText=`left:${x-10}px;top:${y-10}px;`;
+  document.body.appendChild(h);
+  h.addEventListener('animationend',()=>h.remove());
+}
+function spawnHearts(x,y){ for(let i=0;i<8;i++) spawnHeart(x+((Math.random()-0.5)*50),y+((Math.random()-0.5)*50)); }
+
+function spawnConfetti(){
+  const colors=['#c94f6a','#c9973a','#f0d28a','#e8809a','#fff'];
+  for(let i=0;i<30;i++){
+    const c=document.createElement('div');c.className='confetti-piece';
+    const x=Math.random()*window.innerWidth;
+    c.style.cssText=`left:${x}px;top:${window.scrollY+100}px;background:${colors[Math.floor(Math.random()*colors.length)]};
+      animation:confettiFall ${1.5+Math.random()}s ease forwards;transform:rotate(${Math.random()*360}deg);
+      width:${6+Math.random()*8}px;height:${6+Math.random()*8}px;border-radius:${Math.random()>0.5?'50%':'2px'};`;
+    document.body.appendChild(c);
+    c.addEventListener('animationend',()=>c.remove());
+  }
+}
+
+// ─── PETAL CANVAS ─────────────────────────────────────────────
+(function(){
+  const canvas=document.getElementById('petals');
+  const ctx=canvas.getContext('2d');
+  let petals=[];
+  function resize(){ canvas.width=window.innerWidth; canvas.height=window.innerHeight; }
+  window.addEventListener('resize',resize); resize();
+  for(let i=0;i<30;i++) petals.push(mkPetal(true));
+  function mkPetal(rand){
+    return {
+      x: Math.random()*canvas.width,
+      y: rand?Math.random()*canvas.height:-20,
+      r: 4+Math.random()*7,
+      vy: 0.5+Math.random()*1,
+      vx: (Math.random()-0.5)*0.6,
+      rot: Math.random()*360,
+      rSpeed: (Math.random()-0.5)*1.5,
+      opacity: 0.12+Math.random()*0.25,
+      hue: 330+Math.random()*20
+    };
+  }
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    petals.forEach(p=>{
+      ctx.save();
+      ctx.translate(p.x,p.y);
+      ctx.rotate(p.rot*Math.PI/180);
+      ctx.globalAlpha=p.opacity;
+      ctx.beginPath();
+      ctx.ellipse(0,0,p.r,p.r*1.6,0,0,Math.PI*2);
+      ctx.fillStyle=`hsl(${p.hue},70%,80%)`;
+      ctx.fill();
+      ctx.restore();
+      p.y+=p.vy; p.x+=p.vx; p.rot+=p.rSpeed;
+      if(p.y>canvas.height+20) Object.assign(p,mkPetal(false));
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ─── SCROLL REVEAL ───────────────────────────────────────────
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+// ─── CONFETTI KEYFRAME (injected) ────────────────────────────
+const style=document.createElement('style');
+style.textContent=`
+@keyframes confettiFall{
+  0%{opacity:1;transform:translateY(0) rotate(0deg);}
+  100%{opacity:0;transform:translateY(200px) rotate(720deg);}
+}`;
+document.head.appendChild(style);
+
+// ─── INIT ────────────────────────────────────────────────────
+renderPhotos();
+renderStories();
+renderPoems();
+</script>
+</body>
+</html>
