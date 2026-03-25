@@ -557,7 +557,7 @@ footer span{color:var(--rose-lt);}
       <div>
         <p style="font-size:0.85rem;color:var(--muted);margin-bottom:0.4rem;letter-spacing:0.08em;text-transform:uppercase;">Who is writing?</p>
         <div class="who-toggle">
-          <button class="who-btn active" id="storyHimBtn" onclick="setWho('story','him')">💛 Him</button>
+          <button class="who-btn active" id="storyHimBtn" onclick="setWho('story','him')">💛 Prince </button>
           <button class="who-btn" id="storyHerBtn" onclick="setWho('story','her')">🌹 Gizelle</button>
         </div>
       </div>
@@ -587,7 +587,7 @@ footer span{color:var(--rose-lt);}
       <div>
         <p style="font-size:0.85rem;color:var(--muted);margin-bottom:0.4rem;letter-spacing:0.08em;text-transform:uppercase;">Who is writing?</p>
         <div class="who-toggle">
-          <button class="who-btn active" id="poemHimBtn" onclick="setWho('poem','him')">💛 Him</button>
+          <button class="who-btn active" id="poemHimBtn" onclick="setWho('poem','him')">💛Prince</button>
           <button class="who-btn" id="poemHerBtn" onclick="setWho('poem','her')">🌹 Gizelle</button>
         </div>
       </div>
@@ -647,7 +647,7 @@ Happy one month to us 
       <div>
         <p style="font-size:0.85rem;color:var(--muted);margin-bottom:0.4rem;letter-spacing:0.08em;text-transform:uppercase;">Who is adding?</p>
         <div class="who-toggle">
-          <button class="who-btn active" id="photoHimBtn" onclick="setWho('photo','him')">💛 Him</button>
+          <button class="who-btn active" id="photoHimBtn" onclick="setWho('photo','him')">💛 Prince</button>
           <button class="who-btn" id="photoHerBtn" onclick="setWho('photo','her')">🌹 Gizelle</button>
         </div>
       </div>
@@ -761,7 +761,7 @@ function renderPhotos(){
     card.innerHTML=`
       <img src="${p.src}" alt="${p.caption||''}" loading="lazy"/>
       <div class="photo-caption">
-        <strong>${p.who==='her'?'🌹 Gizzele':'💛 Him'} · ${p.date||''}</strong>
+        <strong>${p.who==='her'?'🌹 Gizelle':'💛 Prince'} · ${p.date||''}</strong>
         ${p.caption?p.caption:''}
       </div>
       <button class="photo-del" onclick="deletePhoto(${p.id},event)" title="Remove">✕</button>
@@ -814,7 +814,7 @@ function renderStories(){
     card.className=`story-card by-${s.who}`;
     card.innerHTML=`
       <div class="story-meta">
-        <span class="story-author ${s.who}">${s.who==='her'?'🌹 Gizzele':'💛 Him'}</span>
+        <span class="story-author ${s.who}">${s.who==='her'?'🌹 Gizelle':'💛 Prince'}</span>
         <span class="story-date">${s.date}</span>
       </div>
       <div class="story-title-disp">${s.title}</div>
@@ -863,7 +863,7 @@ function renderPoems(){
     const card = document.createElement('div');
     card.className='poem-card';
     card.innerHTML=`
-      <span class="poem-author-tag ${p.who}">${p.who==='her'?'🌹 Gizelle':'💛 Him'} · ${p.date}</span>
+      <span class="poem-author-tag ${p.who}">${p.who==='her'?'🌹 Gizelle':'💛 Prince'} · ${p.date}</span>
       <div class="poem-title-disp">${p.title}</div>
       <div class="poem-body">${p.body}</div>
       <button class="poem-del" onclick="deletePoem(${p.id})" title="Delete">✕</button>
