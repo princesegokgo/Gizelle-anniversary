@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
 <title>One Month with Gizelle 🌹</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet"/>
 <style>
@@ -128,13 +128,12 @@ nav{
 .reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s,transform 0.7s;}
 .reveal.visible{opacity:1;transform:none;}
 
-/* ── PHOTO GALLERY ── */
+/* Photo Gallery */
 .gallery-controls{
   display:flex;gap:1rem;align-items:center;flex-wrap:wrap;
   margin-bottom:1.5rem;
 }
 
-/* FIX: label acts as the button — guaranteed to open file picker on every browser */
 .upload-label{
   display:inline-flex;align-items:center;gap:0.5rem;
   padding:0.7rem 1.5rem;
@@ -147,15 +146,12 @@ nav{
   user-select:none;
 }
 .upload-label:hover{opacity:0.85;transform:scale(1.03);}
-.upload-label:active{transform:scale(0.97);}
 
-/* FIX: visually hidden but still accessible & clickable */
 #photoFileInput{
   position:absolute;
   width:1px;height:1px;
   opacity:0;overflow:hidden;
   clip:rect(0,0,0,0);
-  white-space:nowrap;
 }
 
 .photo-grid{
@@ -187,7 +183,6 @@ nav{
 }
 .photo-card:hover .photo-del{opacity:1;}
 
-/* ── CAPTION BAR (shown after picking image) ── */
 #captionBar{
   display:none;
   background:var(--surface);
@@ -201,10 +196,10 @@ nav{
 }
 #captionBar.show{display:flex;}
 #captionBar img{
-  width:100%;max-height:200px;object-fit:cover;
+  width:100px;height:100px;object-fit:cover;
   border-radius:10px;border:1px solid var(--border);
 }
-#captionBar .bar-row{display:flex;gap:0.7rem;flex-wrap:wrap;width:100%;}
+#captionBar .bar-row{flex:1;display:flex;gap:0.7rem;flex-wrap:wrap;width:100%;}
 .form-field{
   width:100%;padding:0.85rem 1rem;
   background:var(--card);
@@ -218,7 +213,7 @@ nav{
 .form-field:focus{border-color:var(--rose);}
 textarea.form-field{resize:vertical;min-height:100px;}
 
-/* ── STORIES / POEMS ── */
+/* Stories & Poems */
 .story-form{
   background:var(--surface);
   border:1.5px solid var(--border);
@@ -256,8 +251,8 @@ textarea.form-field{resize:vertical;min-height:100px;}
 }
 .submit-btn:hover{opacity:0.85;transform:scale(1.03);}
 
-.story-list{display:flex;flex-direction:column;gap:1.5rem;}
-.story-card{
+.story-list,.poem-list{display:flex;flex-direction:column;gap:1.5rem;}
+.story-card,.poem-card{
   background:var(--surface);
   border:1.5px solid var(--border);
   border-radius:18px;
@@ -280,65 +275,17 @@ textarea.form-field{resize:vertical;min-height:100px;}
   font-size:1.2rem;color:var(--cream);
   font-style:italic;margin-bottom:0.6rem;
 }
-.story-body{font-size:1rem;line-height:1.8;color:var(--text);}
-.story-del{
+.story-body{font-size:1rem;line-height:1.8;color:var(--text);white-space:pre-line;}
+.poem-body{font-size:1rem;line-height:1.8;color:var(--text);white-space:pre-line;font-style:italic;}
+.story-del,.poem-del{
   position:absolute;top:1rem;right:1rem;
   background:none;border:none;
   color:var(--muted);cursor:pointer;font-size:0.9rem;
   transition:color 0.2s;
 }
-.story-del:hover{color:var(--rose);}
-.story-like{
-  margin-top:1rem;background:none;border:none;
-  color:var(--muted);cursor:pointer;
-  font-family:'Cormorant Garamond',serif;
-  font-size:0.9rem;letter-spacing:0.05em;
-  transition:color 0.2s;display:inline-flex;align-items:center;gap:0.3rem;
-}
-.story-like:hover,.story-like.liked{color:var(--rose-lt);}
+.story-del:hover,.poem-del:hover{color:var(--rose);}
 
-.poem-list{display:flex;flex-direction:column;gap:1.5rem;}
-.poem-card{
-  background:var(--surface);
-  border:1.5px solid var(--border);
-  border-radius:18px;
-  padding:2rem 2.2rem;
-  animation:popIn 0.4s ease;
-  position:relative;
-  text-align:center;
-}
-.poem-card::before{
-  content:'"';
-  font-family:'Playfair Display',serif;
-  font-size:6rem;line-height:0.6;
-  color:var(--rose);opacity:0.1;
-  position:absolute;top:1.2rem;left:1.2rem;
-  pointer-events:none;
-}
-.poem-author-tag{font-family:'Dancing Script',cursive;font-size:1rem;margin-bottom:0.5rem;display:block;}
-.poem-author-tag.her{color:var(--rose-lt);}
-.poem-author-tag.him{color:var(--gold-lt);}
-.poem-title-disp{font-family:'Playfair Display',serif;font-size:1.4rem;font-style:italic;color:var(--cream);margin-bottom:1rem;}
-.poem-body{font-size:1.1rem;line-height:2;color:var(--text);font-style:italic;white-space:pre-line;}
-.poem-del{position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--muted);cursor:pointer;font-size:0.9rem;transition:color 0.2s;}
-.poem-del:hover{color:var(--rose);}
-
-/* ── LIGHTBOX ── */
-.lightbox{
-  position:fixed;inset:0;
-  background:rgba(0,0,0,0.92);
-  z-index:300;
-  display:flex;align-items:center;justify-content:center;
-  opacity:0;pointer-events:none;transition:opacity 0.3s;
-  padding:1rem;
-}
-.lightbox.open{opacity:1;pointer-events:all;}
-.lightbox img{max-width:90vw;max-height:80vh;border-radius:16px;object-fit:contain;border:2px solid var(--border);}
-.lb-caption{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);color:var(--muted);font-style:italic;font-size:1rem;text-align:center;max-width:500px;}
-.lb-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;color:#fff;font-size:1.8rem;cursor:pointer;opacity:0.7;transition:opacity 0.2s;}
-.lb-close:hover{opacity:1;}
-
-/* ── LETTER ── */
+/* Letter */
 .letter-card{
   background:var(--surface);
   border:1.5px solid var(--border);
@@ -355,9 +302,8 @@ textarea.form-field{resize:vertical;min-height:100px;}
 .letter-text{font-size:clamp(1.05rem,2vw,1.2rem);line-height:2;color:var(--text);font-style:italic;}
 .letter-sig{margin-top:2rem;text-align:right;font-family:'Dancing Script',cursive;font-size:1.8rem;color:var(--rose-lt);}
 
+/* Effects */
 .fheart{position:fixed;pointer-events:none;z-index:999;font-size:1.4rem;animation:floatUp 1.4s ease forwards;}
-.confetti-piece{position:fixed;pointer-events:none;z-index:998;}
-
 .empty-state{
   text-align:center;padding:3rem;
   color:var(--muted);font-style:italic;
@@ -382,29 +328,26 @@ footer span{color:var(--rose-lt);}
 @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(8px);}}
 @keyframes floatUp{0%{opacity:1;transform:translateY(0) scale(1);}100%{opacity:0;transform:translateY(-90px) scale(1.8);}}
 @keyframes popIn{from{opacity:0;transform:scale(0.88);}to{opacity:1;transform:scale(1);}}
-@keyframes confettiFall{0%{opacity:1;transform:translateY(0) rotate(0deg);}100%{opacity:0;transform:translateY(200px) rotate(720deg);}}
 
 @media(max-width:600px){
   .photo-grid{grid-template-columns:repeat(2,1fr);}
   .letter-card{padding:2rem 1.2rem;}
+  .toast{white-space:normal;max-width:90%;text-align:center;}
 }
 </style>
 </head>
 <body>
 
-<canvas id="petals"></canvas>
 <div class="toast" id="toast"></div>
 
-<!-- NAV -->
 <nav>
-  <button class="nav-btn active" onclick="scrollTo('home')">🌹 Home</button>
-  <button class="nav-btn" onclick="scrollTo('photos')">📸 Photos</button>
-  <button class="nav-btn" onclick="scrollTo('stories')">📖 Stories</button>
-  <button class="nav-btn" onclick="scrollTo('poems')">✍️ Poems</button>
-  <button class="nav-btn" onclick="scrollTo('letter')">💌 Letter</button>
+  <button class="nav-btn active" onclick="scrollToSection('home')">🌹 Home</button>
+  <button class="nav-btn" onclick="scrollToSection('photos-sec')">📸 Photos</button>
+  <button class="nav-btn" onclick="scrollToSection('stories-sec')">📖 Stories</button>
+  <button class="nav-btn" onclick="scrollToSection('poems-sec')">✍️ Poems</button>
+  <button class="nav-btn" onclick="scrollToSection('letter-sec')">💌 Letter</button>
 </nav>
 
-<!-- HERO -->
 <div class="hero" id="home">
   <span class="hero-eyebrow">✨ one whole month ✨</span>
   <h1 class="hero-title">For <em>Gizelle</em>,<br>with love.</h1>
@@ -414,48 +357,40 @@ footer span{color:var(--rose-lt);}
   <a class="scroll-cue" href="#photos-sec">↓</a>
 </div>
 
-<!-- PHOTOS -->
+<!-- Photos Section -->
 <section class="page-section reveal" id="photos-sec">
   <span class="sec-label">our moments</span>
   <h2 class="sec-title">Our Photo Gallery</h2>
   <div class="divider"></div>
 
   <div class="gallery-controls">
-    <!--
-      FIX: <label for="photoFileInput"> is the button.
-      Clicking a label always opens the linked file input — no JS needed,
-      works on every phone and browser without being blocked.
-    -->
     <label class="upload-label" for="photoFileInput">📸 Add a Photo</label>
     <input type="file" id="photoFileInput" accept="image/*"/>
     <span style="color:var(--muted);font-style:italic;font-size:0.95rem;">Every picture tells our story ✨</span>
   </div>
 
-  <!-- Preview + caption appear here after picking a photo -->
   <div id="captionBar">
     <img id="barPreview" src="" alt="Preview"/>
     <div class="bar-row">
       <div style="width:100%">
-        <p style="font-size:0.8rem;color:var(--muted);margin-bottom:0.4rem;letter-spacing:0.08em;text-transform:uppercase;">Who is adding?</p>
+        <p style="font-size:0.8rem;color:var(--muted);margin-bottom:0.4rem;">Who is adding?</p>
         <div class="who-toggle" style="max-width:300px;">
-          <button class="who-btn active" id="photoHimBtn" onclick="setWho('photo','him')">💛 Prince</button>
-          <button class="who-btn" id="photoHerBtn" onclick="setWho('photo','her')">🌹 Gizelle</button>
+          <button class="who-btn active" id="photoHimBtn" onclick="setPhotoWho('him')">💛 Prince</button>
+          <button class="who-btn" id="photoHerBtn" onclick="setPhotoWho('her')">🌹 Gizelle</button>
         </div>
       </div>
       <input class="form-field" id="photoCaptionInput" placeholder="Write a caption… what made this moment special?" maxlength="120"/>
       <div style="display:flex;gap:0.7rem;flex-wrap:wrap;">
         <button class="submit-btn" onclick="savePhoto()">Add to Gallery ✨</button>
-        <button onclick="cancelPhoto()" style="padding:0.8rem 1.4rem;background:none;border:1.5px solid var(--border);color:var(--muted);border-radius:50px;cursor:pointer;font-family:'Cormorant Garamond',serif;font-size:1rem;">Cancel</button>
+        <button onclick="cancelPhoto()" style="padding:0.8rem 1.4rem;background:none;border:1.5px solid var(--border);color:var(--muted);border-radius:50px;cursor:pointer;">Cancel</button>
       </div>
     </div>
   </div>
 
-  <div class="photo-grid" id="photoGrid">
-    <div class="empty-state" id="photoEmpty">No photos yet — add your first memory together! 🌹</div>
-  </div>
+  <div class="photo-grid" id="photoGrid"></div>
 </section>
 
-<!-- STORIES -->
+<!-- Stories Section -->
 <section class="page-section reveal" id="stories-sec">
   <span class="sec-label">write it down</span>
   <h2 class="sec-title">Memorable Stories</h2>
@@ -465,10 +400,10 @@ footer span{color:var(--rose-lt);}
     <h3>Share a memory…</h3>
     <div class="form-row">
       <div>
-        <p style="font-size:0.85rem;color:var(--muted);margin-bottom:0.4rem;letter-spacing:0.08em;text-transform:uppercase;">Who is writing?</p>
+        <p style="font-size:0.85rem;color:var(--muted);margin-bottom:0.4rem;">Who is writing?</p>
         <div class="who-toggle">
-          <button class="who-btn active" id="storyHimBtn" onclick="setWho('story','him')">💛 Prince</button>
-          <button class="who-btn" id="storyHerBtn" onclick="setWho('story','her')">🌹 Gizelle</button>
+          <button class="who-btn active" id="storyHimBtn" onclick="setStoryWho('him')">💛 Prince</button>
+          <button class="who-btn" id="storyHerBtn" onclick="setStoryWho('her')">🌹 Gizelle</button>
         </div>
       </div>
       <input class="form-field" id="storyTitle" placeholder="Give this memory a title…" maxlength="80"/>
@@ -478,12 +413,10 @@ footer span{color:var(--rose-lt);}
     </div>
   </div>
 
-  <div class="story-list" id="storyList">
-    <div class="empty-state" id="storyEmpty">No stories yet — write your first one! 📖</div>
-  </div>
+  <div class="story-list" id="storyList"></div>
 </section>
 
-<!-- POEMS -->
+<!-- Poems Section -->
 <section class="page-section reveal" id="poems-sec">
   <span class="sec-label">from the heart</span>
   <h2 class="sec-title">Poems & Love Notes</h2>
@@ -493,24 +426,22 @@ footer span{color:var(--rose-lt);}
     <h3>Write a poem…</h3>
     <div class="form-row">
       <div>
-        <p style="font-size:0.85rem;color:var(--muted);margin-bottom:0.4rem;letter-spacing:0.08em;text-transform:uppercase;">Who is writing?</p>
+        <p style="font-size:0.85rem;color:var(--muted);margin-bottom:0.4rem;">Who is writing?</p>
         <div class="who-toggle">
-          <button class="who-btn active" id="poemHimBtn" onclick="setWho('poem','him')">💛 Prince</button>
-          <button class="who-btn" id="poemHerBtn" onclick="setWho('poem','her')">🌹 Gizelle</button>
+          <button class="who-btn active" id="poemHimBtn" onclick="setPoemWho('him')">💛 Prince</button>
+          <button class="who-btn" id="poemHerBtn" onclick="setPoemWho('her')">🌹 Gizelle</button>
         </div>
       </div>
       <input class="form-field" id="poemTitle" placeholder="Title of your poem…" maxlength="80"/>
-      <textarea class="form-field" id="poemBody" placeholder="Write your poem here…&#10;Each line on its own row.&#10;&#10;Let your heart speak freely. 🌹" rows="8" style="white-space:pre;font-style:italic;line-height:2;"></textarea>
+      <textarea class="form-field" id="poemBody" placeholder="Write your poem here…&#10;Each line on its own row.&#10;&#10;Let your heart speak freely. 🌹" rows="8"></textarea>
       <button class="submit-btn" onclick="addPoem()">Publish Poem 🌹</button>
     </div>
   </div>
 
-  <div class="poem-list" id="poemList">
-    <div class="empty-state" id="poemEmpty">No poems yet — write the first verse! ✍️</div>
-  </div>
+  <div class="poem-list" id="poemList"></div>
 </section>
 
-<!-- LETTER -->
+<!-- Letter Section -->
 <section class="page-section reveal" id="letter-sec">
   <span class="sec-label">from me to you</span>
   <h2 class="sec-title">A Letter for Gizelle</h2>
@@ -519,7 +450,7 @@ footer span{color:var(--rose-lt);}
     <p class="letter-text">
       My dearest Gizelle,<br><br>
       I won't pretend our story has been simple. We've known what it feels like to lose each other, to walk separate paths, and to carry the weight of things that once hurt us. But somehow, here we are again… choosing each other, and that choice means more to me than anything easy ever could.<br><br>
-      Gizelle, these past thirty days have been something I can't quite put into perfect words , but I'll try lol<br><br>
+      Gizelle, these past thirty days have been something I can't quite put into perfect words, but I'll try lol<br><br>
       You've brought a kind of warmth into my life that I didn't even realize I had missed so deeply. It's in the way you laugh, the way you speak, the little moments when you don't even try to be special but somehow are. Being with you again doesn't feel like starting over… it feels like finding something that was always meant to be, just waiting for the right time.<br><br>
       These days with you have reminded me how beautiful simple things can be. Talking with you, spending time together, even silence feels different like it actually means something. Like it's ours.<br><br>
       This isn't just about a month. It's about a second chance that I don't take lightly. It's about rebuilding something stronger, more honest, more intentional.<br><br>
@@ -531,22 +462,16 @@ footer span{color:var(--rose-lt);}
   </div>
 </section>
 
-<footer id="letter">
+<footer>
   Made with <span>♥</span> for the most wonderful month of my life.
 </footer>
 
-<!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox" onclick="closeLightbox()">
-  <button class="lb-close">✕</button>
-  <img id="lbImg" src="" alt=""/>
-  <div class="lb-caption" id="lbCaption"></div>
-</div>
-<!-- FIREBASE -->
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-storage-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 
 <script>
+// Firebase Configuration
 const firebaseConfig = {
   apiKey: "AIzaSyCmX8Bb1NljgJ159vf1gZRX5lqNyBiIurw",
   authDomain: "microlink-253b3.firebaseapp.com",
@@ -557,181 +482,418 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-
 const storage = firebase.storage();
 const db = firebase.firestore();
-</script>
 
-<script>
-// ── GLOBAL STATE ─────────────────────────────────────────────
+// Global State
 let storyWho = 'him';
-let poemWho  = 'him';
+let poemWho = 'him';
 let photoWho = 'him';
 let selectedFile = null;
 
-// ── IMAGE SELECT ─────────────────────────────────────────────
-document.getElementById('photoFileInput').addEventListener('change', function(e){
-  selectedFile = e.target.files[0];
-  if(!selectedFile) return;
+// Helper Functions
+function showToast(message) {
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3000);
+}
 
+function scrollToSection(id) {
+  const element = document.getElementById(id);
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+function createHeart() {
+  const heart = document.createElement('div');
+  heart.className = 'fheart';
+  heart.textContent = '💖';
+  heart.style.left = Math.random() * window.innerWidth + 'px';
+  heart.style.top = window.innerHeight - 50 + 'px';
+  heart.style.position = 'fixed';
+  heart.style.pointerEvents = 'none';
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 1400);
+}
+
+// Photo Functions
+function setPhotoWho(who) {
+  photoWho = who;
+  document.getElementById('photoHimBtn').classList.toggle('active', who === 'him');
+  document.getElementById('photoHerBtn').classList.toggle('active', who === 'her');
+}
+
+async function savePhoto() {
+  if (!selectedFile) {
+    showToast('Please select a photo first!');
+    return;
+  }
+
+  const caption = document.getElementById('photoCaptionInput').value.trim();
+  const fileName = Date.now() + '_' + selectedFile.name;
+  const storageRef = storage.ref('photos/' + fileName);
+
+  try {
+    showToast('Uploading photo...');
+    await storageRef.put(selectedFile);
+    const url = await storageRef.getDownloadURL();
+    
+    await db.collection('photos').add({
+      src: url,
+      caption: caption || '✨ A beautiful moment ✨',
+      who: photoWho,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      date: new Date().toISOString()
+    });
+    
+    cancelPhoto();
+    loadPhotos();
+    showToast('Photo added! 🌹');
+  } catch (error) {
+    console.error('Error uploading photo:', error);
+    showToast('Failed to upload photo. Please try again.');
+  }
+}
+
+function cancelPhoto() {
+  selectedFile = null;
+  document.getElementById('captionBar').classList.remove('show');
+  document.getElementById('photoCaptionInput').value = '';
+  document.getElementById('photoFileInput').value = '';
+}
+
+async function loadPhotos() {
+  const grid = document.getElementById('photoGrid');
+  grid.innerHTML = '';
+  
+  try {
+    const snapshot = await db.collection('photos').orderBy('timestamp', 'desc').get();
+    
+    if (snapshot.empty) {
+      grid.innerHTML = '<div class="empty-state">No photos yet — add your first memory together! 🌹</div>';
+      return;
+    }
+    
+    snapshot.forEach(doc => {
+      const photo = doc.data();
+      const card = document.createElement('div');
+      card.className = 'photo-card';
+      card.onclick = (e) => {
+        if (!e.target.classList.contains('photo-del')) {
+          openLightbox(photo.src, `${photo.who === 'her' ? '🌹 Gizelle' : '💛 Prince'}: ${photo.caption}`);
+        }
+      };
+      
+      card.innerHTML = `
+        <img src="${photo.src}" alt="Memory" loading="lazy"/>
+        <div class="photo-caption">
+          <strong>${photo.who === 'her' ? '🌹 Gizelle' : '💛 Prince'}</strong>
+          ${photo.caption || '✨ A beautiful moment ✨'}
+        </div>
+        <button class="photo-del" onclick="deletePhoto('${doc.id}', event)">🗑️</button>
+      `;
+      grid.appendChild(card);
+    });
+  } catch (error) {
+    console.error('Error loading photos:', error);
+    grid.innerHTML = '<div class="empty-state">Error loading photos. Please refresh.</div>';
+  }
+}
+
+async function deletePhoto(photoId, event) {
+  event.stopPropagation();
+  if (confirm('Delete this memory?')) {
+    try {
+      await db.collection('photos').doc(photoId).delete();
+      loadPhotos();
+      showToast('Photo removed.');
+    } catch (error) {
+      console.error('Error deleting photo:', error);
+      showToast('Failed to delete photo.');
+    }
+  }
+}
+
+// Story Functions
+function setStoryWho(who) {
+  storyWho = who;
+  document.getElementById('storyHimBtn').classList.toggle('active', who === 'him');
+  document.getElementById('storyHerBtn').classList.toggle('active', who === 'her');
+}
+
+async function addStory() {
+  const title = document.getElementById('storyTitle').value.trim();
+  const body = document.getElementById('storyBody').value.trim();
+  const date = document.getElementById('storyDate').value;
+  
+  if (!title || !body) {
+    showToast('Please fill in both title and story!');
+    return;
+  }
+  
+  try {
+    await db.collection('stories').add({
+      title: title,
+      body: body,
+      who: storyWho,
+      date: date || new Date().toLocaleDateString(),
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    
+    document.getElementById('storyTitle').value = '';
+    document.getElementById('storyBody').value = '';
+    document.getElementById('storyDate').value = '';
+    loadStories();
+    showToast('Memory saved! 📖');
+  } catch (error) {
+    console.error('Error adding story:', error);
+    showToast('Failed to save story.');
+  }
+}
+
+async function loadStories() {
+  const list = document.getElementById('storyList');
+  list.innerHTML = '';
+  
+  try {
+    const snapshot = await db.collection('stories').orderBy('timestamp', 'desc').get();
+    
+    if (snapshot.empty) {
+      list.innerHTML = '<div class="empty-state">No stories yet — write your first one! 📖</div>';
+      return;
+    }
+    
+    snapshot.forEach(doc => {
+      const story = doc.data();
+      const card = document.createElement('div');
+      card.className = `story-card ${story.who === 'her' ? 'by-her' : 'by-him'}`;
+      card.innerHTML = `
+        <div class="story-meta">
+          <span class="story-author ${story.who === 'her' ? 'her' : 'him'}">
+            ${story.who === 'her' ? '🌹 Gizelle' : '💛 Prince'}
+          </span>
+          <span class="story-date">${story.date}</span>
+        </div>
+        <div class="story-title-disp">${escapeHtml(story.title)}</div>
+        <div class="story-body">${escapeHtml(story.body)}</div>
+        <button class="story-del" onclick="deleteStory('${doc.id}', event)">🗑️</button>
+      `;
+      list.appendChild(card);
+    });
+  } catch (error) {
+    console.error('Error loading stories:', error);
+    list.innerHTML = '<div class="empty-state">Error loading stories.</div>';
+  }
+}
+
+async function deleteStory(storyId, event) {
+  event.stopPropagation();
+  if (confirm('Delete this story?')) {
+    try {
+      await db.collection('stories').doc(storyId).delete();
+      loadStories();
+      showToast('Story removed.');
+    } catch (error) {
+      console.error('Error deleting story:', error);
+      showToast('Failed to delete story.');
+    }
+  }
+}
+
+// Poem Functions
+function setPoemWho(who) {
+  poemWho = who;
+  document.getElementById('poemHimBtn').classList.toggle('active', who === 'him');
+  document.getElementById('poemHerBtn').classList.toggle('active', who === 'her');
+}
+
+async function addPoem() {
+  const title = document.getElementById('poemTitle').value.trim();
+  const body = document.getElementById('poemBody').value.trim();
+  
+  if (!title || !body) {
+    showToast('Please fill in both title and poem!');
+    return;
+  }
+  
+  try {
+    await db.collection('poems').add({
+      title: title,
+      body: body,
+      who: poemWho,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      date: new Date().toLocaleDateString()
+    });
+    
+    document.getElementById('poemTitle').value = '';
+    document.getElementById('poemBody').value = '';
+    loadPoems();
+    showToast('Poem published! 🌹');
+  } catch (error) {
+    console.error('Error adding poem:', error);
+    showToast('Failed to save poem.');
+  }
+}
+
+async function loadPoems() {
+  const list = document.getElementById('poemList');
+  list.innerHTML = '';
+  
+  try {
+    const snapshot = await db.collection('poems').orderBy('timestamp', 'desc').get();
+    
+    if (snapshot.empty) {
+      list.innerHTML = '<div class="empty-state">No poems yet — write the first verse! ✍️</div>';
+      return;
+    }
+    
+    snapshot.forEach(doc => {
+      const poem = doc.data();
+      const card = document.createElement('div');
+      card.className = 'poem-card';
+      card.innerHTML = `
+        <span class="poem-author-tag ${poem.who === 'her' ? 'her' : 'him'}">
+          ${poem.who === 'her' ? '🌹 Gizelle' : '💛 Prince'} · ${poem.date}
+        </span>
+        <div class="poem-title-disp">${escapeHtml(poem.title)}</div>
+        <div class="poem-body">${escapeHtml(poem.body)}</div>
+        <button class="poem-del" onclick="deletePoem('${doc.id}', event)">🗑️</button>
+      `;
+      list.appendChild(card);
+    });
+  } catch (error) {
+    console.error('Error loading poems:', error);
+    list.innerHTML = '<div class="empty-state">Error loading poems.</div>';
+  }
+}
+
+async function deletePoem(poemId, event) {
+  event.stopPropagation();
+  if (confirm('Delete this poem?')) {
+    try {
+      await db.collection('poems').doc(poemId).delete();
+      loadPoems();
+      showToast('Poem removed.');
+    } catch (error) {
+      console.error('Error deleting poem:', error);
+      showToast('Failed to delete poem.');
+    }
+  }
+}
+
+// Lightbox
+function openLightbox(src, caption) {
+  const lightbox = document.getElementById('lightbox');
+  const img = document.getElementById('lbImg');
+  const captionEl = document.getElementById('lbCaption');
+  
+  img.src = src;
+  captionEl.textContent = caption;
+  lightbox.style.display = 'flex';
+  setTimeout(() => lightbox.classList.add('open'), 10);
+}
+
+function closeLightbox() {
+  const lightbox = document.getElementById('lightbox');
+  lightbox.classList.remove('open');
+  setTimeout(() => {
+    lightbox.style.display = 'none';
+    document.getElementById('lbImg').src = '';
+  }, 300);
+}
+
+// Escape HTML to prevent XSS
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+// Scroll Reveal
+function handleScrollReveal() {
+  const reveals = document.querySelectorAll('.reveal');
+  reveals.forEach(reveal => {
+    const windowHeight = window.innerHeight;
+    const revealTop = reveal.getBoundingClientRect().top;
+    const revealPoint = 150;
+    
+    if (revealTop < windowHeight - revealPoint) {
+      reveal.classList.add('visible');
+    }
+  });
+}
+
+// File input change handler
+document.getElementById('photoFileInput').addEventListener('change', function(e) {
+  selectedFile = e.target.files[0];
+  if (!selectedFile) return;
+  
   const reader = new FileReader();
-  reader.onload = e => {
+  reader.onload = function(e) {
     document.getElementById('barPreview').src = e.target.result;
     document.getElementById('captionBar').classList.add('show');
   };
   reader.readAsDataURL(selectedFile);
 });
 
-// ── SAVE PHOTO (UPLOAD TO FIREBASE) ──────────────────────────
-async function savePhoto(){
-  if(!selectedFile){
-    alert("Select a photo first!");
-    return;
+// Heart animation
+document.getElementById('mainHeart').addEventListener('click', () => {
+  for (let i = 0; i < 20; i++) {
+    setTimeout(() => createHeart(), i * 50);
   }
+  showToast('Love you! 💖');
+});
 
-  const caption = document.getElementById('photoCaptionInput').value;
-
-  const fileName = Date.now() + "_" + selectedFile.name;
-  const storageRef = storage.ref('photos/' + fileName);
-
-  // Upload file
-  await storageRef.put(selectedFile);
-
-  // Get URL
-  const url = await storageRef.getDownloadURL();
-
-  // Save to Firestore
-  await db.collection("photos").add({
-    src: url,
-    caption: caption,
-    who: photoWho,
-    date: new Date().toLocaleDateString()
+// Navigation active state
+window.addEventListener('scroll', () => {
+  const sections = ['home', 'photos-sec', 'stories-sec', 'poems-sec', 'letter-sec'];
+  let current = '';
+  
+  sections.forEach(sectionId => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      const sectionTop = section.offsetTop;
+      const sectionBottom = sectionTop + section.offsetHeight;
+      const scrollPos = window.scrollY + 100;
+      
+      if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
+        current = sectionId;
+      }
+    }
   });
+  
+  document.querySelectorAll('.nav-btn').forEach(btn => {
+    btn.classList.remove('active');
+    if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(current)) {
+      btn.classList.add('active');
+    }
+  });
+});
 
-  cancelPhoto();
+// Initialize
+window.addEventListener('load', () => {
   loadPhotos();
-}
-
-// ── LOAD PHOTOS FROM FIREBASE ────────────────────────────────
-async function loadPhotos(){
-  const grid = document.getElementById('photoGrid');
-  grid.innerHTML = "";
-
-  const snapshot = await db.collection("photos").orderBy("date","desc").get();
-
-  if(snapshot.empty){
-    grid.innerHTML = '<div class="empty-state">No photos yet 🌹</div>';
-    return;
-  }
-
-  snapshot.forEach(doc => {
-    const p = doc.data();
-
-    const card = document.createElement('div');
-    card.className = 'photo-card';
-    card.innerHTML = `
-      <img src="${p.src}"/>
-      <div class="photo-caption">
-        <strong>${p.who==='her'?'🌹 Gizelle':'💛 Prince'} · ${p.date}</strong>
-        ${p.caption}
-      </div>
-    `;
-
-    grid.appendChild(card);
-  });
-}
-
-// ── CANCEL PHOTO ─────────────────────────────────────────────
-function cancelPhoto(){
-  selectedFile = null;
-  document.getElementById('captionBar').classList.remove('show');
-  document.getElementById('photoCaptionInput').value = '';
-}
-
-// ── STORIES (FIRESTORE) ──────────────────────────────────────
-async function addStory(){
-  const title = document.getElementById('storyTitle').value;
-  const body  = document.getElementById('storyBody').value;
-
-  if(!title || !body){
-    alert("Fill everything!");
-    return;
-  }
-
-  await db.collection("stories").add({
-    title,
-    body,
-    who: storyWho,
-    date: new Date().toLocaleDateString()
-  });
-
   loadStories();
-}
-
-async function loadStories(){
-  const list = document.getElementById('storyList');
-  list.innerHTML = "";
-
-  const snapshot = await db.collection("stories").get();
-
-  snapshot.forEach(doc => {
-    const s = doc.data();
-
-    const card = document.createElement('div');
-    card.className = 'story-card';
-    card.innerHTML = `
-      <strong>${s.title}</strong>
-      <p>${s.body}</p>
-      <small>${s.date}</small>
-    `;
-
-    list.appendChild(card);
-  });
-}
-
-// ── POEMS (FIRESTORE) ────────────────────────────────────────
-async function addPoem(){
-  const title = document.getElementById('poemTitle').value;
-  const body  = document.getElementById('poemBody').value;
-
-  if(!title || !body){
-    alert("Fill everything!");
-    return;
-  }
-
-  await db.collection("poems").add({
-    title,
-    body,
-    who: poemWho,
-    date: new Date().toLocaleDateString()
-  });
-
   loadPoems();
-}
+  handleScrollReveal();
+  
+  // Set default dates
+  const today = new Date().toISOString().split('T')[0];
+  if (document.getElementById('storyDate')) {
+    document.getElementById('storyDate').value = today;
+  }
+});
 
-async function loadPoems(){
-  const list = document.getElementById('poemList');
-  list.innerHTML = "";
-
-  const snapshot = await db.collection("poems").get();
-
-  snapshot.forEach(doc => {
-    const p = doc.data();
-
-    const card = document.createElement('div');
-    card.className = 'poem-card';
-    card.innerHTML = `
-      <strong>${p.title}</strong>
-      <p>${p.body}</p>
-      <small>${p.date}</small>
-    `;
-
-    list.appendChild(card);
-  });
-}
-
-// ── INIT ─────────────────────────────────────────────────────
-loadPhotos();
-loadStories();
-loadPoems();
+window.addEventListener('scroll', handleScrollReveal);
 </script>
+
+<!-- Lightbox Modal -->
+<div id="lightbox" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:1000;align-items:center;justify-content:center;transition:opacity 0.3s;">
+  <button onclick="closeLightbox()" style="position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;">✕</button>
+  <img id="lbImg" style="max-width:90vw;max-height:80vh;object-fit:contain;border-radius:12px;"/>
+  <div id="lbCaption" style="position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);color:var(--muted);font-style:italic;text-align:center;max-width:80%;background:rgba(0,0,0,0.6);padding:0.5rem 1rem;border-radius:20px;"></div>
+</div>
+</body>
+</html>
