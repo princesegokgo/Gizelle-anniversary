@@ -2,707 +2,163 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
-<title>One Month with Gizelle 🌹</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>For Gizelle 🌹</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet"/>
 <style>
 :root {
-  --bg: #0d0608;
-  --surface: #1a0b10;
-  --card: #22101a;
-  --border: #4a2035;
-  --rose: #c94f6a;
-  --rose-lt: #e8809a;
-  --gold: #c9973a;
-  --gold-lt: #f0d28a;
-  --cream: #f5e8d8;
-  --muted: #9a7080;
-  --text: #f0dde4;
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Cormorant Garamond', serif;
-  overflow-x: hidden;
-  min-height: 100vh;
-}
-
-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.8rem 1rem;
-  background: rgba(13, 6, 8, 0.85);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(201, 79, 106, 0.2);
-  flex-wrap: wrap;
-}
-
-.nav-btn {
-  background: none;
-  border: 1px solid transparent;
-  color: var(--muted);
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 0.9rem;
-  letter-spacing: 0.08em;
-  padding: 0.35rem 0.9rem;
-  border-radius: 50px;
-  cursor: pointer;
-  transition: all 0.2s;
-  text-transform: uppercase;
-}
-
-.nav-btn:hover,
-.nav-btn.active {
-  color: var(--rose-lt);
-  border-color: var(--rose);
-}
-
-.hero {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 2rem;
-  position: relative;
-  z-index: 1;
-  background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(201, 79, 106, 0.12) 0%, transparent 70%);
-}
-
-.hero-eyebrow {
-  font-family: 'Dancing Script', cursive;
-  font-size: 1.3rem;
-  color: var(--gold);
-  opacity: 0;
-  animation: fadeUp 0.8s ease 0.3s forwards;
-}
-
-.hero-title {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(3.5rem, 11vw, 8rem);
-  font-weight: 700;
-  line-height: 0.95;
-  letter-spacing: -0.02em;
-  color: var(--cream);
-  opacity: 0;
-  animation: fadeUp 0.9s ease 0.6s forwards;
-}
-
-.hero-title em {
-  font-style: italic;
-  color: var(--rose-lt);
-}
-
-.hero-sub {
-  font-size: clamp(1rem, 2.5vw, 1.5rem);
-  font-style: italic;
-  color: var(--muted);
-  margin-top: 1.2rem;
-  opacity: 0;
-  animation: fadeUp 0.9s ease 0.9s forwards;
-}
-
-.hero-heart {
-  margin-top: 2.5rem;
-  font-size: 4rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  display: inline-block;
-  opacity: 0;
-  animation: fadeUp 0.9s ease 1.2s forwards;
-  transition: transform 0.15s;
-  filter: drop-shadow(0 0 20px rgba(201, 79, 106, 0.6));
-}
-
-.hero-heart:hover {
-  transform: scale(1.3) rotate(-8deg);
-}
-
-.hero-hint {
-  font-size: 0.75rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-top: 0.5rem;
-  opacity: 0;
-  animation: fadeUp 0.8s ease 1.5s forwards;
-}
-
-.scroll-cue {
-  position: absolute;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  color: var(--muted);
-  font-size: 1.6rem;
-  animation: bob 2.2s ease-in-out infinite;
-  text-decoration: none;
-}
-
-.page-section {
-  position: relative;
-  z-index: 1;
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 6rem 1.5rem;
-}
-
-.sec-label {
-  font-family: 'Dancing Script', cursive;
-  font-size: 1.1rem;
-  color: var(--gold);
-  display: block;
-  margin-bottom: 0.5rem;
-}
-
-.sec-title {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: 700;
-  color: var(--cream);
-  line-height: 1.15;
-}
-
-.divider {
-  width: 60px;
-  height: 2px;
-  background: linear-gradient(90deg, var(--rose), var(--gold-lt));
-  margin: 1.2rem 0 2rem;
-  border-radius: 2px;
-}
-
-.reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.7s, transform 0.7s;
-}
-
-.reveal.visible {
-  opacity: 1;
-  transform: none;
-}
-
-/* Photo Gallery */
-.gallery-controls {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  flex-wrap: wrap;
-  margin-bottom: 1.5rem;
-}
-
-.upload-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.7rem 1.5rem;
-  background: linear-gradient(135deg, var(--rose), #a33554);
-  color: #fff;
-  border-radius: 50px;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: opacity 0.2s, transform 0.15s;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  user-select: none;
-}
-
-.upload-label:hover {
-  opacity: 0.85;
-  transform: scale(1.03);
-}
-
-#photoFileInput {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  opacity: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-}
-
-.photo-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 1rem;
-}
-
-.photo-card {
-  position: relative;
-  border-radius: 16px;
-  overflow: hidden;
-  border: 1.5px solid var(--border);
-  background: var(--card);
-  cursor: pointer;
-  transition: transform 0.3s, box-shadow 0.3s;
-  animation: popIn 0.4s ease;
-}
-
-.photo-card:hover {
-  transform: scale(1.03);
-  box-shadow: 0 12px 40px rgba(201, 79, 106, 0.25);
-}
-
-.photo-card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  display: block;
-}
-
-.photo-caption {
-  padding: 0.8rem 1rem;
-  font-style: italic;
-  font-size: 0.9rem;
-  color: var(--muted);
-}
-
-.photo-caption strong {
-  color: var(--rose-lt);
-  font-style: normal;
-  font-size: 0.8rem;
-  display: block;
-  margin-bottom: 0.2rem;
-}
-
-.photo-del {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  background: rgba(0, 0, 0, 0.6);
-  border: none;
-  color: #fff;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  font-size: 0.75rem;
-  cursor: pointer;
-  opacity: 0;
-  transition: opacity 0.2s;
-  z-index: 10;
-}
-
-.photo-card:hover .photo-del {
-  opacity: 1;
-}
-
-#captionBar {
-  display: none;
-  background: var(--surface);
-  border: 1.5px solid var(--border);
-  border-radius: 16px;
-  padding: 1.2rem 1.4rem;
-  margin-bottom: 1.5rem;
-  gap: 1rem;
-  flex-wrap: wrap;
-  align-items: flex-start;
-}
-
-#captionBar.show {
-  display: flex;
-}
-
-#captionBar img {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-}
-
-#captionBar .bar-row {
-  flex: 1;
-  display: flex;
-  gap: 0.7rem;
-  flex-wrap: wrap;
-  width: 100%;
-}
-
-.form-field {
-  width: 100%;
-  padding: 0.85rem 1rem;
-  background: var(--card);
-  border: 1.5px solid var(--border);
-  border-radius: 12px;
-  color: var(--text);
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1rem;
-  outline: none;
-  transition: border-color 0.2s;
-}
-
-.form-field:focus {
-  border-color: var(--rose);
-}
-
-textarea.form-field {
-  resize: vertical;
-  min-height: 100px;
-}
-
-/* Stories & Poems */
-.story-form {
-  background: var(--surface);
-  border: 1.5px solid var(--border);
-  border-radius: 20px;
-  padding: 1.8rem;
-  margin-bottom: 2rem;
-}
-
-.story-form h3 {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.3rem;
-  color: var(--cream);
-  margin-bottom: 1.2rem;
-  font-style: italic;
-}
-
-.form-row {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-}
-
-.who-toggle {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.who-btn {
-  flex: 1;
-  padding: 0.5rem;
-  background: var(--card);
-  border: 1.5px solid var(--border);
-  color: var(--muted);
-  border-radius: 8px;
-  cursor: pointer;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 0.95rem;
-  transition: all 0.2s;
-}
-
-.who-btn.active {
-  background: var(--rose);
-  border-color: var(--rose);
-  color: #fff;
-}
-
-.submit-btn {
-  padding: 0.8rem 2rem;
-  background: linear-gradient(135deg, var(--gold), #a07010);
-  color: #fff;
-  border: none;
-  border-radius: 50px;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  letter-spacing: 0.05em;
-  transition: opacity 0.2s, transform 0.15s;
-  margin-top: 0.5rem;
-  align-self: flex-start;
-}
-
-.submit-btn:hover {
-  opacity: 0.85;
-  transform: scale(1.03);
-}
-
-.submit-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.story-list,
-.poem-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.story-card,
-.poem-card {
-  background: var(--surface);
-  border: 1.5px solid var(--border);
-  border-radius: 18px;
-  padding: 1.6rem;
-  animation: popIn 0.4s ease;
-  position: relative;
-}
-
-.story-card.by-her {
-  border-left: 3px solid var(--rose);
-}
-
-.story-card.by-him {
-  border-left: 3px solid var(--gold);
-}
-
-.story-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0.8rem;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.story-author {
-  font-family: 'Dancing Script', cursive;
-  font-size: 1.1rem;
-}
-
-.story-author.her {
-  color: var(--rose-lt);
-}
-
-.story-author.him {
-  color: var(--gold-lt);
-}
-
-.story-date {
-  font-size: 0.8rem;
-  color: var(--muted);
-  letter-spacing: 0.05em;
-}
-
-.story-title-disp {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.2rem;
-  color: var(--cream);
-  font-style: italic;
-  margin-bottom: 0.6rem;
-}
-
-.story-body {
-  font-size: 1rem;
-  line-height: 1.8;
-  color: var(--text);
-  white-space: pre-line;
-}
-
-.poem-body {
-  font-size: 1rem;
-  line-height: 1.8;
-  color: var(--text);
-  white-space: pre-line;
-  font-style: italic;
-}
-
-.story-del,
-.poem-del {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: none;
-  border: none;
-  color: var(--muted);
-  cursor: pointer;
-  font-size: 0.9rem;
-  transition: color 0.2s;
-}
-
-.story-del:hover,
-.poem-del:hover {
-  color: var(--rose);
-}
-
-/* Letter */
-.letter-card {
-  background: var(--surface);
-  border: 1.5px solid var(--border);
-  border-radius: 20px;
-  padding: 3rem;
-  position: relative;
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
-}
-
-.letter-card::before {
-  content: '✉';
-  position: absolute;
-  top: -1rem;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 1.8rem;
-  background: var(--bg);
-  padding: 0 0.6rem;
-}
-
-.letter-text {
-  font-size: clamp(1.05rem, 2vw, 1.2rem);
-  line-height: 2;
-  color: var(--text);
-  font-style: italic;
-}
-
-.letter-sig {
-  margin-top: 2rem;
-  text-align: right;
-  font-family: 'Dancing Script', cursive;
-  font-size: 1.8rem;
-  color: var(--rose-lt);
-}
-
-/* Effects */
-.fheart {
-  position: fixed;
-  pointer-events: none;
-  z-index: 999;
-  font-size: 1.4rem;
-  animation: floatUp 1.4s ease forwards;
-}
-
-.empty-state {
-  text-align: center;
-  padding: 3rem;
-  color: var(--muted);
-  font-style: italic;
-  border: 1.5px dashed var(--border);
-  border-radius: 16px;
-  font-size: 1.05rem;
-}
-
-.toast {
-  position: fixed;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%) translateY(20px);
-  background: var(--rose);
-  color: #fff;
-  padding: 0.7rem 1.5rem;
-  border-radius: 50px;
-  font-family: 'Dancing Script', cursive;
-  font-size: 1.1rem;
-  z-index: 500;
-  opacity: 0;
-  transition: all 0.3s;
-  pointer-events: none;
-  white-space: nowrap;
-}
-
-.toast.show {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
-
-.sync-status {
-  position: fixed;
-  bottom: 1rem;
-  right: 1rem;
-  background: rgba(0, 0, 0, 0.7);
-  padding: 0.3rem 0.8rem;
-  border-radius: 20px;
-  font-size: 0.7rem;
-  color: var(--muted);
-  z-index: 100;
-  pointer-events: none;
-}
-
-footer {
-  text-align: center;
-  padding: 4rem 2rem 3rem;
-  position: relative;
-  z-index: 1;
-  font-family: 'Dancing Script', cursive;
-  font-size: 1.6rem;
-  color: var(--muted);
-}
-
-footer span {
-  color: var(--rose-lt);
-}
-
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes bob {
-  0%,
-  100% {
-    transform: translateX(-50%) translateY(0);
-  }
-  50% {
-    transform: translateX(-50%) translateY(8px);
-  }
-}
-
-@keyframes floatUp {
-  0% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-90px) scale(1.8);
-  }
-}
-
-@keyframes popIn {
-  from {
-    opacity: 0;
-    transform: scale(0.88);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@media (max-width: 600px) {
-  .photo-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .letter-card {
-    padding: 2rem 1.2rem;
-  }
-  .toast {
-    white-space: normal;
-    max-width: 90%;
-    text-align: center;
-  }
-}
+  --bg:#0d0608;--surface:#1a0b10;--card:#22101a;--border:#4a2035;
+  --rose:#c94f6a;--rose-lt:#e8809a;--gold:#c9973a;--gold-lt:#f0d28a;
+  --cream:#f5e8d8;--muted:#9a7080;--text:#f0dde4;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',serif;overflow-x:hidden;min-height:100vh;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:center;gap:0.4rem;padding:0.7rem 0.8rem;background:rgba(13,6,8,0.9);backdrop-filter:blur(12px);border-bottom:1px solid rgba(201,79,106,0.2);flex-wrap:wrap;}
+.nav-btn{background:none;border:1px solid transparent;color:var(--muted);font-family:'Cormorant Garamond',serif;font-size:0.85rem;letter-spacing:0.08em;padding:0.3rem 0.8rem;border-radius:50px;cursor:pointer;transition:all 0.2s;text-transform:uppercase;}
+.nav-btn:hover,.nav-btn.active{color:var(--rose-lt);border-color:var(--rose);}
+
+/* SYNC BADGE */
+.sync-badge{position:fixed;top:0.4rem;right:0.8rem;z-index:200;font-size:0.65rem;padding:0.2rem 0.6rem;border-radius:20px;background:rgba(0,0,0,0.5);color:var(--muted);letter-spacing:0.05em;}
+.sync-badge.synced{color:#6dbf8a;}
+.sync-badge.syncing{color:var(--gold-lt);}
+.sync-badge.error{color:var(--rose-lt);}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;position:relative;z-index:1;background:radial-gradient(ellipse 70% 60% at 50% 50%, rgba(201,79,106,0.12) 0%, transparent 70%);}
+.hero-eyebrow{font-family:'Dancing Script',cursive;font-size:1.3rem;color:var(--gold);opacity:0;animation:fadeUp 0.8s ease 0.3s forwards;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(3.5rem,11vw,8rem);font-weight:700;line-height:0.95;letter-spacing:-0.02em;color:var(--cream);opacity:0;animation:fadeUp 0.9s ease 0.6s forwards;}
+.hero-title em{font-style:italic;color:var(--rose-lt);}
+.hero-sub{font-size:clamp(1rem,2.5vw,1.5rem);font-style:italic;color:var(--muted);margin-top:1.2rem;opacity:0;animation:fadeUp 0.9s ease 0.9s forwards;}
+.hero-heart{margin-top:2.5rem;font-size:4rem;background:none;border:none;cursor:pointer;display:inline-block;opacity:0;animation:fadeUp 0.9s ease 1.2s forwards;transition:transform 0.15s;filter:drop-shadow(0 0 20px rgba(201,79,106,0.6));}
+.hero-heart:hover{transform:scale(1.3) rotate(-8deg);}
+.hero-hint{font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-top:0.5rem;opacity:0;animation:fadeUp 0.8s ease 1.5s forwards;}
+.scroll-cue{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);color:var(--muted);font-size:1.6rem;animation:bob 2.2s ease-in-out infinite;text-decoration:none;}
+
+/* SECTIONS */
+.page-section{position:relative;z-index:1;max-width:960px;margin:0 auto;padding:6rem 1.5rem;}
+.sec-label{font-family:'Dancing Script',cursive;font-size:1.1rem;color:var(--gold);display:block;margin-bottom:0.5rem;}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3rem);font-weight:700;color:var(--cream);line-height:1.15;}
+.divider{width:60px;height:2px;background:linear-gradient(90deg,var(--rose),var(--gold-lt));margin:1.2rem 0 2rem;border-radius:2px;}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s,transform 0.7s;}
+.reveal.visible{opacity:1;transform:none;}
+
+/* PHOTO UPLOAD */
+.gallery-controls{display:flex;gap:1rem;align-items:center;flex-wrap:wrap;margin-bottom:1.5rem;}
+.upload-label{display:inline-flex;align-items:center;gap:0.5rem;padding:0.7rem 1.5rem;background:linear-gradient(135deg,var(--rose),#a33554);color:#fff;border-radius:50px;font-family:'Cormorant Garamond',serif;font-size:1rem;cursor:pointer;transition:opacity 0.2s,transform 0.15s;font-weight:600;letter-spacing:0.04em;user-select:none;}
+.upload-label:hover{opacity:0.85;transform:scale(1.03);}
+#photoFileInput{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;clip:rect(0,0,0,0);}
+
+.photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;}
+.photo-card{position:relative;border-radius:16px;overflow:hidden;border:1.5px solid var(--border);background:var(--card);cursor:pointer;transition:transform 0.3s,box-shadow 0.3s;animation:popIn 0.4s ease;}
+.photo-card:hover{transform:scale(1.03);box-shadow:0 12px 40px rgba(201,79,106,0.25);}
+.photo-card img{width:100%;height:200px;object-fit:cover;display:block;}
+.photo-caption{padding:0.8rem 1rem;font-style:italic;font-size:0.9rem;color:var(--muted);}
+.photo-caption strong{color:var(--rose-lt);font-style:normal;font-size:0.8rem;display:block;margin-bottom:0.2rem;}
+.photo-del{position:absolute;top:0.5rem;right:0.5rem;background:rgba(0,0,0,0.6);border:none;color:#fff;width:28px;height:28px;border-radius:50%;font-size:0.8rem;cursor:pointer;opacity:0;transition:opacity 0.2s;z-index:10;}
+.photo-card:hover .photo-del{opacity:1;}
+
+/* CAPTION BAR */
+#captionBar{display:none;background:var(--surface);border:1.5px solid var(--border);border-radius:16px;padding:1.2rem 1.4rem;margin-bottom:1.5rem;gap:1rem;flex-wrap:wrap;align-items:flex-start;}
+#captionBar.show{display:flex;}
+#captionBar img{width:90px;height:90px;object-fit:cover;border-radius:10px;border:1px solid var(--border);flex-shrink:0;}
+.bar-right{flex:1;display:flex;flex-direction:column;gap:0.8rem;min-width:200px;}
+
+/* FORMS */
+.story-form{background:var(--surface);border:1.5px solid var(--border);border-radius:20px;padding:1.8rem;margin-bottom:2rem;}
+.story-form h3{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--cream);margin-bottom:1.2rem;font-style:italic;}
+.form-row{display:flex;flex-direction:column;gap:0.8rem;}
+.form-field{width:100%;padding:0.85rem 1rem;background:var(--card);border:1.5px solid var(--border);border-radius:12px;color:var(--text);font-family:'Cormorant Garamond',serif;font-size:1rem;outline:none;transition:border-color 0.2s;}
+.form-field:focus{border-color:var(--rose);}
+textarea.form-field{resize:vertical;min-height:100px;}
+.who-toggle{display:flex;gap:0.5rem;}
+.who-btn{flex:1;padding:0.5rem;background:var(--card);border:1.5px solid var(--border);color:var(--muted);border-radius:8px;cursor:pointer;font-family:'Cormorant Garamond',serif;font-size:0.95rem;transition:all 0.2s;}
+.who-btn.active{background:var(--rose);border-color:var(--rose);color:#fff;}
+.submit-btn{padding:0.8rem 2rem;background:linear-gradient(135deg,var(--gold),#a07010);color:#fff;border:none;border-radius:50px;font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;cursor:pointer;letter-spacing:0.05em;transition:opacity 0.2s,transform 0.15s;align-self:flex-start;}
+.submit-btn:hover{opacity:0.85;transform:scale(1.03);}
+.cancel-btn{padding:0.8rem 1.4rem;background:none;border:1.5px solid var(--border);color:var(--muted);border-radius:50px;cursor:pointer;font-family:'Cormorant Garamond',serif;font-size:0.95rem;transition:color 0.2s,border-color 0.2s;}
+.cancel-btn:hover{color:var(--rose-lt);border-color:var(--rose);}
+
+/* CARDS */
+.story-list,.poem-list{display:flex;flex-direction:column;gap:1.5rem;}
+.story-card,.poem-card{background:var(--surface);border:1.5px solid var(--border);border-radius:18px;padding:1.6rem;animation:popIn 0.4s ease;position:relative;}
+.story-card.by-her{border-left:3px solid var(--rose);}
+.story-card.by-him{border-left:3px solid var(--gold);}
+.story-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.8rem;flex-wrap:wrap;gap:0.5rem;}
+.story-author{font-family:'Dancing Script',cursive;font-size:1.1rem;}
+.story-author.her{color:var(--rose-lt);}
+.story-author.him{color:var(--gold-lt);}
+.story-date{font-size:0.8rem;color:var(--muted);letter-spacing:0.05em;}
+.story-title-disp{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--cream);font-style:italic;margin-bottom:0.6rem;}
+.story-body{font-size:1rem;line-height:1.8;color:var(--text);white-space:pre-line;}
+.poem-card{text-align:center;}
+.poem-card::before{content:'"';font-family:'Playfair Display',serif;font-size:6rem;line-height:0.6;color:var(--rose);opacity:0.1;position:absolute;top:1.2rem;left:1.2rem;pointer-events:none;}
+.poem-author-tag{font-family:'Dancing Script',cursive;font-size:1rem;margin-bottom:0.5rem;display:block;}
+.poem-author-tag.her{color:var(--rose-lt);}
+.poem-author-tag.him{color:var(--gold-lt);}
+.poem-title-disp{font-family:'Playfair Display',serif;font-size:1.4rem;font-style:italic;color:var(--cream);margin-bottom:1rem;}
+.poem-body{font-size:1.1rem;line-height:2;color:var(--text);font-style:italic;white-space:pre-line;}
+.card-del{position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--muted);cursor:pointer;font-size:0.9rem;transition:color 0.2s;padding:0.2rem;}
+.card-del:hover{color:var(--rose);}
+
+/* LETTER */
+.letter-card{background:var(--surface);border:1.5px solid var(--border);border-radius:20px;padding:3rem;position:relative;box-shadow:0 8px 40px rgba(0,0,0,0.4);}
+.letter-card::before{content:'✉';position:absolute;top:-1rem;left:50%;transform:translateX(-50%);font-size:1.8rem;background:var(--bg);padding:0 0.6rem;}
+.letter-text{font-size:clamp(1.05rem,2vw,1.2rem);line-height:2;color:var(--text);font-style:italic;}
+.letter-sig{margin-top:2rem;text-align:right;font-family:'Dancing Script',cursive;font-size:1.8rem;color:var(--rose-lt);}
+
+/* LIGHTBOX */
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:300;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.3s;padding:1rem;}
+.lightbox.open{opacity:1;pointer-events:all;}
+.lightbox img{max-width:90vw;max-height:80vh;border-radius:16px;object-fit:contain;border:2px solid var(--border);}
+.lb-caption{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);color:var(--muted);font-style:italic;font-size:1rem;text-align:center;max-width:500px;background:rgba(0,0,0,0.5);padding:0.4rem 1rem;border-radius:20px;}
+.lb-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;color:#fff;font-size:1.8rem;cursor:pointer;opacity:0.7;transition:opacity 0.2s;}
+.lb-close:hover{opacity:1;}
+
+/* EFFECTS */
+.fheart{position:fixed;pointer-events:none;z-index:999;font-size:1.4rem;animation:floatUp 1.4s ease forwards;}
+.confetti-piece{position:fixed;pointer-events:none;z-index:998;border-radius:2px;}
+.empty-state{text-align:center;padding:3rem;color:var(--muted);font-style:italic;border:1.5px dashed var(--border);border-radius:16px;font-size:1.05rem;}
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(20px);background:var(--rose);color:#fff;padding:0.7rem 1.5rem;border-radius:50px;font-family:'Dancing Script',cursive;font-size:1.1rem;z-index:500;opacity:0;transition:all 0.3s;pointer-events:none;white-space:nowrap;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.loading-overlay{position:fixed;inset:0;background:var(--bg);z-index:400;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;transition:opacity 0.5s;}
+.loading-overlay.hidden{opacity:0;pointer-events:none;}
+.loading-title{font-family:'Playfair Display',serif;font-size:2rem;color:var(--cream);font-style:italic;}
+.loading-sub{font-family:'Dancing Script',cursive;font-size:1.2rem;color:var(--gold);animation:pulse 1.5s ease-in-out infinite;}
+footer{text-align:center;padding:4rem 2rem 3rem;position:relative;z-index:1;font-family:'Dancing Script',cursive;font-size:1.6rem;color:var(--muted);}
+footer span{color:var(--rose-lt);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:none;}}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(8px);}}
+@keyframes floatUp{0%{opacity:1;transform:translateY(0) scale(1);}100%{opacity:0;transform:translateY(-90px) scale(1.8);}}
+@keyframes popIn{from{opacity:0;transform:scale(0.88);}to{opacity:1;transform:scale(1);}}
+@keyframes confettiFall{0%{opacity:1;transform:translateY(0) rotate(0deg);}100%{opacity:0;transform:translateY(200px) rotate(720deg);}}
+@keyframes pulse{0%,100%{opacity:0.5;}50%{opacity:1;}}
+@media(max-width:600px){.photo-grid{grid-template-columns:repeat(2,1fr);}.letter-card{padding:2rem 1.2rem;}}
 </style>
 </head>
 <body>
 
+<!-- Loading screen -->
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="loading-title">For Gizelle 🌹</div>
+  <div class="loading-sub">Loading your memories…</div>
+</div>
+
 <div class="toast" id="toast"></div>
-<div class="sync-status" id="syncStatus">🔄 Connecting...</div>
+<div class="sync-badge" id="syncBadge">⟳ connecting…</div>
 
 <nav>
-  <button class="nav-btn active" onclick="scrollToSection('home')">🌹 Home</button>
-  <button class="nav-btn" onclick="scrollToSection('photos-sec')">📸 Photos</button>
-  <button class="nav-btn" onclick="scrollToSection('stories-sec')">📖 Stories</button>
-  <button class="nav-btn" onclick="scrollToSection('poems-sec')">✍️ Poems</button>
-  <button class="nav-btn" onclick="scrollToSection('letter-sec')">💌 Letter</button>
+  <button class="nav-btn active" onclick="navTo('home')">🌹 Home</button>
+  <button class="nav-btn" onclick="navTo('photos-sec')">📸 Photos</button>
+  <button class="nav-btn" onclick="navTo('stories-sec')">📖 Stories</button>
+  <button class="nav-btn" onclick="navTo('poems-sec')">✍️ Poems</button>
+  <button class="nav-btn" onclick="navTo('letter-sec')">💌 Letter</button>
 </nav>
 
+<!-- HERO -->
 <div class="hero" id="home">
   <span class="hero-eyebrow">✨ one whole month ✨</span>
   <h1 class="hero-title">For <em>Gizelle</em>,<br>with love.</h1>
@@ -712,91 +168,84 @@ footer span {
   <a class="scroll-cue" href="#photos-sec">↓</a>
 </div>
 
-<!-- Photos Section -->
+<!-- PHOTOS -->
 <section class="page-section reveal" id="photos-sec">
   <span class="sec-label">our moments</span>
   <h2 class="sec-title">Our Photo Gallery</h2>
   <div class="divider"></div>
-
   <div class="gallery-controls">
     <label class="upload-label" for="photoFileInput">📸 Add a Photo</label>
-    <input type="file" id="photoFileInput" accept="image/*" />
-    <span style="color:var(--muted);font-style:italic;font-size:0.95rem;">✨ Syncs across all devices ✨</span>
+    <input type="file" id="photoFileInput" accept="image/*"/>
+    <span style="color:var(--muted);font-style:italic;font-size:0.9rem;">Both of you can see every photo ✨</span>
   </div>
-
   <div id="captionBar">
-    <img id="barPreview" src="" alt="Preview" />
-    <div class="bar-row">
-      <div style="width:100%">
-        <p style="font-size:0.8rem;color:var(--muted);margin-bottom:0.4rem;">Who is adding?</p>
-        <div class="who-toggle" style="max-width:300px;">
-          <button class="who-btn active" id="photoHimBtn" onclick="setPhotoWho('him')">💛 Prince</button>
-          <button class="who-btn" id="photoHerBtn" onclick="setPhotoWho('her')">🌹 Gizelle</button>
+    <img id="barPreview" src="" alt=""/>
+    <div class="bar-right">
+      <div>
+        <p style="font-size:0.8rem;color:var(--muted);margin-bottom:0.4rem;letter-spacing:0.08em;text-transform:uppercase;">Who is adding?</p>
+        <div class="who-toggle" style="max-width:280px;">
+          <button class="who-btn active" id="photoHimBtn" onclick="setWho('photo','him')">💛 Prince</button>
+          <button class="who-btn" id="photoHerBtn" onclick="setWho('photo','her')">🌹 Gizelle</button>
         </div>
       </div>
-      <input class="form-field" id="photoCaptionInput" placeholder="Write a caption… what made this moment special?" maxlength="120" />
+      <input class="form-field" id="photoCaptionInput" placeholder="Write a caption… what made this moment special?" maxlength="120"/>
       <div style="display:flex;gap:0.7rem;flex-wrap:wrap;">
-        <button class="submit-btn" id="savePhotoBtn" onclick="savePhoto()">Add to Gallery ✨</button>
-        <button onclick="cancelPhoto()" style="padding:0.8rem 1.4rem;background:none;border:1.5px solid var(--border);color:var(--muted);border-radius:50px;cursor:pointer;">Cancel</button>
+        <button class="submit-btn" onclick="savePhoto()">Add to Gallery ✨</button>
+        <button class="cancel-btn" onclick="cancelPhoto()">Cancel</button>
       </div>
     </div>
   </div>
-
   <div class="photo-grid" id="photoGrid"></div>
 </section>
 
-<!-- Stories Section -->
+<!-- STORIES -->
 <section class="page-section reveal" id="stories-sec">
   <span class="sec-label">write it down</span>
   <h2 class="sec-title">Memorable Stories</h2>
   <div class="divider"></div>
-
   <div class="story-form">
     <h3>Share a memory…</h3>
     <div class="form-row">
       <div>
-        <p style="font-size:0.85rem;color:var(--muted);margin-bottom:0.4rem;">Who is writing?</p>
+        <p style="font-size:0.85rem;color:var(--muted);margin-bottom:0.4rem;letter-spacing:0.08em;text-transform:uppercase;">Who is writing?</p>
         <div class="who-toggle">
-          <button class="who-btn active" id="storyHimBtn" onclick="setStoryWho('him')">💛 Prince</button>
-          <button class="who-btn" id="storyHerBtn" onclick="setStoryWho('her')">🌹 Gizelle</button>
+          <button class="who-btn active" id="storyHimBtn" onclick="setWho('story','him')">💛 Prince</button>
+          <button class="who-btn" id="storyHerBtn" onclick="setWho('story','her')">🌹 Gizelle</button>
         </div>
       </div>
-      <input class="form-field" id="storyTitle" placeholder="Give this memory a title…" maxlength="80" />
-      <input class="form-field" id="storyDate" type="date" />
+      <input class="form-field" id="storyTitle" placeholder="Give this memory a title…" maxlength="80"/>
+      <input class="form-field" id="storyDate" type="date"/>
       <textarea class="form-field" id="storyBody" placeholder="Tell the story… What happened? How did it feel? Why will you never forget it?" rows="5"></textarea>
       <button class="submit-btn" onclick="addStory()">Post Memory ✨</button>
     </div>
   </div>
-
   <div class="story-list" id="storyList"></div>
 </section>
 
-<!-- Poems Section -->
+<!-- POEMS -->
 <section class="page-section reveal" id="poems-sec">
   <span class="sec-label">from the heart</span>
   <h2 class="sec-title">Poems & Love Notes</h2>
   <div class="divider"></div>
-
   <div class="story-form">
     <h3>Write a poem…</h3>
     <div class="form-row">
       <div>
-        <p style="font-size:0.85rem;color:var(--muted);margin-bottom:0.4rem;">Who is writing?</p>
+        <p style="font-size:0.85rem;color:var(--muted);margin-bottom:0.4rem;letter-spacing:0.08em;text-transform:uppercase;">Who is writing?</p>
         <div class="who-toggle">
-          <button class="who-btn active" id="poemHimBtn" onclick="setPoemWho('him')">💛 Prince</button>
-          <button class="who-btn" id="poemHerBtn" onclick="setPoemWho('her')">🌹 Gizelle</button>
+          <button class="who-btn active" id="poemHimBtn" onclick="setWho('poem','him')">💛 Prince</button>
+          <button class="who-btn" id="poemHerBtn" onclick="setWho('poem','her')">🌹 Gizelle</button>
         </div>
       </div>
-      <input class="form-field" id="poemTitle" placeholder="Title of your poem…" maxlength="80" />
-      <textarea class="form-field" id="poemBody" placeholder="Write your poem here…&#10;Each line on its own row.&#10;&#10;Let your heart speak freely. 🌹" rows="8"></textarea>
+      <input class="form-field" id="poemTitle" placeholder="Title of your poem…" maxlength="80"/>
+      <textarea class="form-field" id="poemBody" placeholder="Write your poem here…&#10;Each line on its own row.&#10;&#10;Let your heart speak freely. 🌹" rows="8" style="font-style:italic;"></textarea>
       <button class="submit-btn" onclick="addPoem()">Publish Poem 🌹</button>
     </div>
   </div>
-
   <div class="poem-list" id="poemList"></div>
 </section>
 
-<!-- Letter Section -->
+<!-- LETTER -->
 <section class="page-section reveal" id="letter-sec">
   <span class="sec-label">from me to you</span>
   <h2 class="sec-title">A Letter for Gizelle</h2>
@@ -807,524 +256,339 @@ footer span {
       I won't pretend our story has been simple. We've known what it feels like to lose each other, to walk separate paths, and to carry the weight of things that once hurt us. But somehow, here we are again… choosing each other, and that choice means more to me than anything easy ever could.<br><br>
       Gizelle, these past thirty days have been something I can't quite put into perfect words, but I'll try lol<br><br>
       You've brought a kind of warmth into my life that I didn't even realize I had missed so deeply. It's in the way you laugh, the way you speak, the little moments when you don't even try to be special but somehow are. Being with you again doesn't feel like starting over… it feels like finding something that was always meant to be, just waiting for the right time.<br><br>
-      These days with you have reminded me how beautiful simple things can be. Talking with you, spending time together, even silence feels different like it actually means something. Like it's ours.<br><br>
+      These days with you have reminded me how beautiful simple things can be. Talking with you, spending time together, even silence feels different — like it actually means something. Like it's ours.<br><br>
       This isn't just about a month. It's about a second chance that I don't take lightly. It's about rebuilding something stronger, more honest, more intentional.<br><br>
       And if this is only the beginning… then I'm ready to turn every page with you, slowly, carefully, making sure this story is one we're both proud of.<br><br>
-      I'm here, Gizelle. Not just for now but for what we're building.<br><br>
+      I'm here, Gizelle. Not just for now — but for what we're building.<br><br>
       Happy one month to us 🌹
     </p>
     <div class="letter-sig">Forever yours 🌹</div>
   </div>
 </section>
 
-<footer>
-  Made with <span>♥</span> for the most wonderful month of my life.
-</footer>
+<footer>Made with <span>♥</span> for the most wonderful month of my life.</footer>
 
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-storage-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" onclick="closeLb()">✕</button>
+  <img id="lbImg" src="" alt=""/>
+  <div class="lb-caption" id="lbCaption"></div>
+</div>
 
 <script>
-// Firebase Configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyCmX8Bb1NljgJ159vf1gZRX5lqNyBiIurw",
-  authDomain: "microlink-253b3.firebaseapp.com",
-  projectId: "microlink-253b3",
-  storageBucket: "microlink-253b3.appspot.com",
-  messagingSenderId: "735599080890",
-  appId: "1:735599080890:web:aa7bf85fd3256953d25983"
-};
+// ═══════════════════════════════════════════════════
+// SHARED STORAGE — uses window.storage (Claude artifact
+// persistent storage). shared=true means BOTH of you
+// see the same data on any device, any browser.
+// ═══════════════════════════════════════════════════
 
-// Initialize Firebase
-let db, storage;
-let isFirebaseReady = false;
+const KEYS = { photos:'giz_photos_index', stories:'giz_stories', poems:'giz_poems' };
+let photoWho='him', storyWho='him', poemWho='him';
+let pendingDataURL = null;
+let storageReady = false;
 
-try {
-  const app = firebase.initializeApp(firebaseConfig);
-  db = firebase.firestore(app);
-  storage = firebase.storage(app);
-  isFirebaseReady = true;
-  document.getElementById('syncStatus').innerHTML = '☁️ Synced to Cloud';
-  document.getElementById('syncStatus').style.color = '#c94f6a';
-  console.log('✅ Firebase connected successfully');
-} catch (error) {
-  console.error('❌ Firebase connection failed:', error);
-  document.getElementById('syncStatus').innerHTML = '⚠️ Offline Mode';
-  document.getElementById('syncStatus').style.color = '#c9973a';
-  showToast('Running in offline mode. Photos will not sync across devices.', true);
-}
-
-// Global State
-let photoWho = 'him';
-let storyWho = 'him';
-let poemWho = 'him';
-let selectedFile = null;
-let selectedPreviewUrl = null;
-
-// Helper Functions
-function showToast(message, isError = false) {
-  const toast = document.getElementById('toast');
-  toast.textContent = message;
-  toast.style.background = isError ? '#a33554' : 'var(--rose)';
-  toast.classList.add('show');
-  setTimeout(() => {
-    toast.classList.remove('show');
-    toast.style.background = 'var(--rose)';
-  }, 3000);
-}
-
-function scrollToSection(id) {
-  const element = document.getElementById(id);
-  if (element) {
-    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-}
-
-function createHeart() {
-  const heart = document.createElement('div');
-  heart.className = 'fheart';
-  heart.textContent = '💖';
-  heart.style.left = Math.random() * window.innerWidth + 'px';
-  heart.style.top = window.innerHeight - 50 + 'px';
-  heart.style.position = 'fixed';
-  heart.style.pointerEvents = 'none';
-  document.body.appendChild(heart);
-  setTimeout(() => heart.remove(), 1400);
-}
-
-function escapeHtml(str) {
-  if (!str) return '';
-  const div = document.createElement('div');
-  div.textContent = str;
-  return div.innerHTML;
-}
-
-// ========== PHOTO FUNCTIONS ==========
-function setPhotoWho(who) {
-  photoWho = who;
-  document.getElementById('photoHimBtn').classList.toggle('active', who === 'him');
-  document.getElementById('photoHerBtn').classList.toggle('active', who === 'her');
-}
-
-async function savePhoto() {
-  if (!selectedFile || !selectedPreviewUrl) {
-    showToast('Please select a photo first!', true);
-    return;
-  }
-
-  if (!isFirebaseReady) {
-    showToast('Cannot upload: Not connected to cloud. Please check your internet.', true);
-    return;
-  }
-
-  const caption = document.getElementById('photoCaptionInput').value.trim();
-  const saveBtn = document.getElementById('savePhotoBtn');
-  saveBtn.disabled = true;
-  saveBtn.textContent = 'Uploading...';
-
+// ── STORAGE HELPERS ──────────────────────────────────
+async function sget(key) {
   try {
-    // Create unique filename
-    const fileName = `${Date.now()}_${selectedFile.name}`;
-    const storageRef = storage.ref(`photos/${fileName}`);
-    
-    // Upload file
-    const uploadTask = await storageRef.put(selectedFile);
-    const downloadURL = await uploadTask.ref.getDownloadURL();
-    
-    // Save to Firestore
-    await db.collection('photos').add({
-      src: downloadURL,
-      caption: caption || '✨ A beautiful moment ✨',
-      who: photoWho,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-      date: new Date().toLocaleDateString()
-    });
-    
-    showToast('Photo uploaded! 🌹 It will appear on all devices');
-    cancelPhoto();
-    loadPhotos();
-  } catch (error) {
-    console.error('Upload error:', error);
-    showToast('Upload failed: ' + (error.message || 'Please try again'), true);
-  } finally {
-    saveBtn.disabled = false;
-    saveBtn.textContent = 'Add to Gallery ✨';
+    const r = await window.storage.get(key, true); // shared=true
+    return r ? JSON.parse(r.value) : null;
+  } catch { return null; }
+}
+async function sset(key, val) {
+  try {
+    await window.storage.set(key, JSON.stringify(val), true); // shared=true
+    return true;
+  } catch(e) {
+    console.error('storage set failed', e);
+    return false;
   }
+}
+async function sdel(key) {
+  try { await window.storage.delete(key, true); } catch {}
+}
+
+// ── SYNC BADGE ───────────────────────────────────────
+function setBadge(state) {
+  const b = document.getElementById('syncBadge');
+  if (state==='synced')   { b.textContent='✓ Synced'; b.className='sync-badge synced'; }
+  if (state==='syncing')  { b.textContent='⟳ Syncing…'; b.className='sync-badge syncing'; }
+  if (state==='error')    { b.textContent='⚠ Offline mode'; b.className='sync-badge error'; }
+}
+
+// ── TOAST ────────────────────────────────────────────
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// ── WHO TOGGLE ───────────────────────────────────────
+function setWho(sec, who) {
+  if(sec==='photo'){ photoWho=who; document.getElementById('photoHimBtn').classList.toggle('active',who==='him'); document.getElementById('photoHerBtn').classList.toggle('active',who==='her'); }
+  if(sec==='story'){ storyWho=who; document.getElementById('storyHimBtn').classList.toggle('active',who==='him'); document.getElementById('storyHerBtn').classList.toggle('active',who==='her'); }
+  if(sec==='poem'){  poemWho=who;  document.getElementById('poemHimBtn').classList.toggle('active',who==='him');  document.getElementById('poemHerBtn').classList.toggle('active',who==='her');  }
+}
+
+// ── IMAGE COMPRESSION ────────────────────────────────
+function compress(file, cb) {
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = new Image();
+    img.onload = () => {
+      const MAX = 800;
+      let w = img.width, h = img.height;
+      if (w > MAX || h > MAX) { if(w>h){h=Math.round(h*MAX/w);w=MAX;}else{w=Math.round(w*MAX/h);h=MAX;} }
+      const c = document.createElement('canvas');
+      c.width=w; c.height=h;
+      c.getContext('2d').drawImage(img,0,0,w,h);
+      cb(c.toDataURL('image/jpeg', 0.7));
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+// ── FILE INPUT ───────────────────────────────────────
+document.getElementById('photoFileInput').addEventListener('change', function(e) {
+  const file = e.target.files[0]; if(!file) return;
+  toast('Loading photo…');
+  compress(file, url => {
+    pendingDataURL = url;
+    document.getElementById('barPreview').src = url;
+    document.getElementById('captionBar').classList.add('show');
+    document.getElementById('photoCaptionInput').focus();
+    toast('Ready! Add a caption and save ✨');
+  });
+  e.target.value = '';
+});
+
+// ── PHOTOS ───────────────────────────────────────────
+async function savePhoto() {
+  if (!pendingDataURL) { toast('Please pick a photo first! 📸'); return; }
+  setBadge('syncing');
+  const caption = document.getElementById('photoCaptionInput').value.trim();
+  const id = 'photo_' + Date.now();
+  const meta = { id, caption, who:photoWho, date: new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}) };
+
+  // Store image data and metadata separately
+  const [imgOk, metaOk] = await Promise.all([
+    sset(id, pendingDataURL),
+    (async () => {
+      let index = await sget(KEYS.photos) || [];
+      index.unshift(meta);
+      return sset(KEYS.photos, index);
+    })()
+  ]);
+
+  if (imgOk && metaOk) { setBadge('synced'); toast('Photo added! 📸✨'); spawnConfetti(); }
+  else { setBadge('error'); toast('Could not save — storage may be full'); }
+
+  cancelPhoto();
+  renderPhotos();
 }
 
 function cancelPhoto() {
-  selectedFile = null;
-  selectedPreviewUrl = null;
+  pendingDataURL = null;
   document.getElementById('captionBar').classList.remove('show');
-  document.getElementById('photoCaptionInput').value = '';
-  document.getElementById('photoFileInput').value = '';
   document.getElementById('barPreview').src = '';
+  document.getElementById('photoCaptionInput').value = '';
 }
 
-async function loadPhotos() {
+async function renderPhotos() {
   const grid = document.getElementById('photoGrid');
   grid.innerHTML = '';
-  
-  if (!isFirebaseReady) {
-    grid.innerHTML = '<div class="empty-state">⚠️ Cannot load photos: Not connected to cloud. Please check your internet connection.</div>';
-    return;
-  }
-  
-  try {
-    const snapshot = await db.collection('photos').orderBy('timestamp', 'desc').get();
-    
-    if (snapshot.empty) {
-      grid.innerHTML = '<div class="empty-state">No photos yet — add your first memory together! 🌹</div>';
-      return;
-    }
-    
-    snapshot.forEach(doc => {
-      const photo = doc.data();
-      const card = document.createElement('div');
-      card.className = 'photo-card';
-      card.onclick = (e) => {
-        if (!e.target.classList.contains('photo-del')) {
-          openLightbox(photo.src, `${photo.who === 'her' ? '🌹 Gizelle' : '💛 Prince'}: ${photo.caption}`);
-        }
-      };
-      
-      card.innerHTML = `
-        <img src="${photo.src}" alt="Memory" loading="lazy" onerror="this.src='https://via.placeholder.com/300x200?text=Image+Loading+Error'"/>
-        <div class="photo-caption">
-          <strong>${photo.who === 'her' ? '🌹 Gizelle' : '💛 Prince'} · ${photo.date || 'recent'}</strong>
-          ${escapeHtml(photo.caption)}
-        </div>
-        <button class="photo-del" onclick="deletePhoto('${doc.id}', event)">🗑️</button>
-      `;
-      grid.appendChild(card);
-    });
-  } catch (error) {
-    console.error('Error loading photos:', error);
-    grid.innerHTML = '<div class="empty-state">Error loading photos. Please refresh the page.</div>';
+  const index = await sget(KEYS.photos) || [];
+  if (!index.length) { grid.innerHTML = '<div class="empty-state">No photos yet — add your first memory together! 🌹</div>'; return; }
+
+  for (const p of index) {
+    const imgData = await sget(p.id);
+    if (!imgData) continue;
+    const card = document.createElement('div');
+    card.className = 'photo-card';
+    card.innerHTML = `
+      <img src="${imgData}" alt="${esc(p.caption)}" loading="lazy"/>
+      <div class="photo-caption">
+        <strong>${p.who==='her'?'🌹 Gizelle':'💛 Prince'} · ${p.date||''}</strong>
+        ${esc(p.caption)}
+      </div>
+      <button class="photo-del" title="Delete">✕</button>
+    `;
+    card.querySelector('img').onclick = () => openLb(imgData, p.caption);
+    card.querySelector('.photo-del').onclick = async e => {
+      e.stopPropagation();
+      if (!confirm('Remove this photo?')) return;
+      await sdel(p.id);
+      let index2 = await sget(KEYS.photos) || [];
+      index2 = index2.filter(x => x.id !== p.id);
+      await sset(KEYS.photos, index2);
+      setBadge('synced'); renderPhotos(); toast('Photo removed');
+    };
+    grid.appendChild(card);
   }
 }
 
-async function deletePhoto(photoId, event) {
-  event.stopPropagation();
-  if (!confirm('Delete this memory forever?')) return;
-  
-  if (!isFirebaseReady) {
-    showToast('Cannot delete: Not connected to cloud', true);
-    return;
-  }
-  
-  try {
-    await db.collection('photos').doc(photoId).delete();
-    showToast('Photo deleted');
-    loadPhotos();
-  } catch (error) {
-    console.error('Delete error:', error);
-    showToast('Failed to delete photo', true);
-  }
-}
-
-// ========== STORY FUNCTIONS ==========
-function setStoryWho(who) {
-  storyWho = who;
-  document.getElementById('storyHimBtn').classList.toggle('active', who === 'him');
-  document.getElementById('storyHerBtn').classList.toggle('active', who === 'her');
-}
-
+// ── STORIES ──────────────────────────────────────────
 async function addStory() {
   const title = document.getElementById('storyTitle').value.trim();
-  const body = document.getElementById('storyBody').value.trim();
-  const date = document.getElementById('storyDate').value || new Date().toLocaleDateString();
-  
-  if (!title || !body) {
-    showToast('Please fill in both title and story!', true);
-    return;
-  }
-  
-  if (!isFirebaseReady) {
-    showToast('Cannot save: Not connected to cloud', true);
-    return;
-  }
-  
-  try {
-    await db.collection('stories').add({
-      title: title,
-      body: body,
-      who: storyWho,
-      date: date,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp()
-    });
-    
-    document.getElementById('storyTitle').value = '';
-    document.getElementById('storyBody').value = '';
-    showToast('Story saved! 📖 It will appear on all devices');
-    loadStories();
-  } catch (error) {
-    console.error('Error saving story:', error);
-    showToast('Failed to save story', true);
-  }
+  const body  = document.getElementById('storyBody').value.trim();
+  const date  = document.getElementById('storyDate').value;
+  if (!title||!body) { toast('Please fill in the title and story! 📖'); return; }
+  setBadge('syncing');
+  const stories = await sget(KEYS.stories) || [];
+  stories.unshift({
+    id:'s_'+Date.now(), title, body, who:storyWho,
+    date: date ? new Date(date).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})
+               : new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}),
+    likes:0
+  });
+  const ok = await sset(KEYS.stories, stories);
+  if(ok){ setBadge('synced'); toast('Memory saved! 💖'); spawnConfetti(); }
+  else  { setBadge('error'); toast('Could not save — try again'); }
+  document.getElementById('storyTitle').value='';
+  document.getElementById('storyBody').value='';
+  document.getElementById('storyDate').value='';
+  renderStories();
 }
 
-async function loadStories() {
+async function renderStories() {
   const list = document.getElementById('storyList');
   list.innerHTML = '';
-  
-  if (!isFirebaseReady) {
-    list.innerHTML = '<div class="empty-state">⚠️ Cannot load stories: Not connected to cloud</div>';
-    return;
-  }
-  
-  try {
-    const snapshot = await db.collection('stories').orderBy('timestamp', 'desc').get();
-    
-    if (snapshot.empty) {
-      list.innerHTML = '<div class="empty-state">No stories yet — write your first one! 📖</div>';
-      return;
-    }
-    
-    snapshot.forEach(doc => {
-      const story = doc.data();
-      const card = document.createElement('div');
-      card.className = `story-card ${story.who === 'her' ? 'by-her' : 'by-him'}`;
-      card.innerHTML = `
-        <div class="story-meta">
-          <span class="story-author ${story.who === 'her' ? 'her' : 'him'}">
-            ${story.who === 'her' ? '🌹 Gizelle' : '💛 Prince'}
-          </span>
-          <span class="story-date">${story.date}</span>
-        </div>
-        <div class="story-title-disp">${escapeHtml(story.title)}</div>
-        <div class="story-body">${escapeHtml(story.body)}</div>
-        <button class="story-del" onclick="deleteStory('${doc.id}', event)">🗑️</button>
-      `;
-      list.appendChild(card);
-    });
-  } catch (error) {
-    console.error('Error loading stories:', error);
-    list.innerHTML = '<div class="empty-state">Error loading stories</div>';
-  }
+  const stories = await sget(KEYS.stories) || [];
+  if (!stories.length) { list.innerHTML='<div class="empty-state">No stories yet — write your first one! 📖</div>'; return; }
+  stories.forEach(s => {
+    const card = document.createElement('div');
+    card.className = `story-card by-${s.who}`;
+    card.innerHTML = `
+      <div class="story-meta">
+        <span class="story-author ${s.who}">${s.who==='her'?'🌹 Gizelle':'💛 Prince'}</span>
+        <span class="story-date">${s.date}</span>
+      </div>
+      <div class="story-title-disp">${esc(s.title)}</div>
+      <div class="story-body">${esc(s.body)}</div>
+      <button class="card-del" title="Delete">✕</button>
+    `;
+    card.querySelector('.card-del').onclick = async () => {
+      if(!confirm('Delete this story?')) return;
+      const all = await sget(KEYS.stories) || [];
+      await sset(KEYS.stories, all.filter(x=>x.id!==s.id));
+      setBadge('synced'); renderStories(); toast('Story deleted');
+    };
+    list.appendChild(card);
+  });
 }
 
-async function deleteStory(storyId, event) {
-  event.stopPropagation();
-  if (!confirm('Delete this story?')) return;
-  
-  try {
-    await db.collection('stories').doc(storyId).delete();
-    showToast('Story deleted');
-    loadStories();
-  } catch (error) {
-    showToast('Failed to delete story', true);
-  }
-}
-
-// ========== POEM FUNCTIONS ==========
-function setPoemWho(who) {
-  poemWho = who;
-  document.getElementById('poemHimBtn').classList.toggle('active', who === 'him');
-  document.getElementById('poemHerBtn').classList.toggle('active', who === 'her');
-}
-
+// ── POEMS ────────────────────────────────────────────
 async function addPoem() {
   const title = document.getElementById('poemTitle').value.trim();
-  const body = document.getElementById('poemBody').value.trim();
-  
-  if (!title || !body) {
-    showToast('Please fill in both title and poem!', true);
-    return;
-  }
-  
-  if (!isFirebaseReady) {
-    showToast('Cannot save: Not connected to cloud', true);
-    return;
-  }
-  
-  try {
-    await db.collection('poems').add({
-      title: title,
-      body: body,
-      who: poemWho,
-      date: new Date().toLocaleDateString(),
-      timestamp: firebase.firestore.FieldValue.serverTimestamp()
-    });
-    
-    document.getElementById('poemTitle').value = '';
-    document.getElementById('poemBody').value = '';
-    showToast('Poem published! 🌹 It will appear on all devices');
-    loadPoems();
-  } catch (error) {
-    console.error('Error saving poem:', error);
-    showToast('Failed to save poem', true);
-  }
+  const body  = document.getElementById('poemBody').value.trim();
+  if (!title||!body) { toast('Please fill in the title and poem! ✍️'); return; }
+  setBadge('syncing');
+  const poems = await sget(KEYS.poems) || [];
+  poems.unshift({ id:'p_'+Date.now(), title, body, who:poemWho, date:new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}) });
+  const ok = await sset(KEYS.poems, poems);
+  if(ok){ setBadge('synced'); toast('Poem published! 🌹'); spawnConfetti(); }
+  else  { setBadge('error'); toast('Could not save — try again'); }
+  document.getElementById('poemTitle').value='';
+  document.getElementById('poemBody').value='';
+  renderPoems();
 }
 
-async function loadPoems() {
+async function renderPoems() {
   const list = document.getElementById('poemList');
   list.innerHTML = '';
-  
-  if (!isFirebaseReady) {
-    list.innerHTML = '<div class="empty-state">⚠️ Cannot load poems: Not connected to cloud</div>';
-    return;
-  }
-  
-  try {
-    const snapshot = await db.collection('poems').orderBy('timestamp', 'desc').get();
-    
-    if (snapshot.empty) {
-      list.innerHTML = '<div class="empty-state">No poems yet — write the first verse! ✍️</div>';
-      return;
-    }
-    
-    snapshot.forEach(doc => {
-      const poem = doc.data();
-      const card = document.createElement('div');
-      card.className = 'poem-card';
-      card.innerHTML = `
-        <span class="poem-author-tag ${poem.who === 'her' ? 'her' : 'him'}">
-          ${poem.who === 'her' ? '🌹 Gizelle' : '💛 Prince'} · ${poem.date}
-        </span>
-        <div class="poem-title-disp">${escapeHtml(poem.title)}</div>
-        <div class="poem-body">${escapeHtml(poem.body)}</div>
-        <button class="poem-del" onclick="deletePoem('${doc.id}', event)">🗑️</button>
-      `;
-      list.appendChild(card);
-    });
-  } catch (error) {
-    console.error('Error loading poems:', error);
-    list.innerHTML = '<div class="empty-state">Error loading poems</div>';
-  }
-}
-
-async function deletePoem(poemId, event) {
-  event.stopPropagation();
-  if (!confirm('Delete this poem?')) return;
-  
-  try {
-    await db.collection('poems').doc(poemId).delete();
-    showToast('Poem deleted');
-    loadPoems();
-  } catch (error) {
-    showToast('Failed to delete poem', true);
-  }
-}
-
-// Lightbox
-function openLightbox(src, caption) {
-  const lightbox = document.getElementById('lightbox');
-  const img = document.getElementById('lbImg');
-  const captionEl = document.getElementById('lbCaption');
-  
-  img.src = src;
-  captionEl.textContent = caption;
-  lightbox.style.display = 'flex';
-  setTimeout(() => lightbox.classList.add('open'), 10);
-}
-
-function closeLightbox() {
-  const lightbox = document.getElementById('lightbox');
-  lightbox.classList.remove('open');
-  setTimeout(() => {
-    lightbox.style.display = 'none';
-    document.getElementById('lbImg').src = '';
-  }, 300);
-}
-
-// Scroll Reveal
-function handleScrollReveal() {
-  const reveals = document.querySelectorAll('.reveal');
-  reveals.forEach(reveal => {
-    const windowHeight = window.innerHeight;
-    const revealTop = reveal.getBoundingClientRect().top;
-    const revealPoint = 150;
-    
-    if (revealTop < windowHeight - revealPoint) {
-      reveal.classList.add('visible');
-    }
+  const poems = await sget(KEYS.poems) || [];
+  if (!poems.length) { list.innerHTML='<div class="empty-state">No poems yet — write the first verse! ✍️</div>'; return; }
+  poems.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'poem-card';
+    card.innerHTML = `
+      <span class="poem-author-tag ${p.who}">${p.who==='her'?'🌹 Gizelle':'💛 Prince'} · ${p.date}</span>
+      <div class="poem-title-disp">${esc(p.title)}</div>
+      <div class="poem-body">${esc(p.body)}</div>
+      <button class="card-del" title="Delete">✕</button>
+    `;
+    card.querySelector('.card-del').onclick = async () => {
+      if(!confirm('Delete this poem?')) return;
+      const all = await sget(KEYS.poems) || [];
+      await sset(KEYS.poems, all.filter(x=>x.id!==p.id));
+      setBadge('synced'); renderPoems(); toast('Poem deleted');
+    };
+    list.appendChild(card);
   });
 }
 
-// File input handler
-document.getElementById('photoFileInput').addEventListener('change', function(e) {
-  selectedFile = e.target.files[0];
-  if (!selectedFile) return;
-  
-  // Check file size (max 5MB)
-  if (selectedFile.size > 5 * 1024 * 1024) {
-    showToast('Photo too large! Please choose an image under 5MB.', true);
-    this.value = '';
-    return;
-  }
-  
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    selectedPreviewUrl = e.target.result;
-    document.getElementById('barPreview').src = selectedPreviewUrl;
-    document.getElementById('captionBar').classList.add('show');
-  };
-  reader.readAsDataURL(selectedFile);
-});
+// ── LIGHTBOX ─────────────────────────────────────────
+function openLb(src, caption) { document.getElementById('lbImg').src=src; document.getElementById('lbCaption').textContent=caption||''; document.getElementById('lightbox').classList.add('open'); }
+function closeLb() { document.getElementById('lightbox').classList.remove('open'); }
+document.getElementById('lightbox').onclick = e => { if(e.target===document.getElementById('lightbox')) closeLb(); };
 
-// Heart animation
-document.getElementById('mainHeart').addEventListener('click', () => {
-  for (let i = 0; i < 20; i++) {
-    setTimeout(() => createHeart(), i * 50);
-  }
-  showToast('Love you! 💖');
+// ── HEARTS / CONFETTI ────────────────────────────────
+document.getElementById('mainHeart').addEventListener('click', e => {
+  for(let i=0;i<12;i++) spawnHeart(e.clientX+((Math.random()-.5)*60), e.clientY+((Math.random()-.5)*60));
+  spawnConfetti();
 });
-
-// Navigation active state
-window.addEventListener('scroll', () => {
-  const sections = ['home', 'photos-sec', 'stories-sec', 'poems-sec', 'letter-sec'];
-  let current = '';
-  
-  sections.forEach(sectionId => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      const sectionTop = section.offsetTop;
-      const sectionBottom = sectionTop + section.offsetHeight;
-      const scrollPos = window.scrollY + 100;
-      
-      if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
-        current = sectionId;
-      }
-    }
-  });
-  
-  document.querySelectorAll('.nav-btn').forEach(btn => {
-    btn.classList.remove('active');
-    if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(current)) {
-      btn.classList.add('active');
-    }
-  });
+document.addEventListener('click', e => {
+  if(e.target.closest('.hero')||e.target.id==='mainHeart') return;
+  if(Math.random()<0.2) spawnHeart(e.clientX,e.clientY);
 });
+function spawnHeart(x,y){ const h=document.createElement('div'); h.className='fheart'; h.textContent=['💖','💕','🌹','✨','💗'][Math.floor(Math.random()*5)]; h.style.cssText=`left:${x-10}px;top:${y-10}px;`; document.body.appendChild(h); h.addEventListener('animationend',()=>h.remove()); }
+function spawnConfetti(){ const c=['#c94f6a','#c9973a','#f0d28a','#e8809a','#fff']; for(let i=0;i<28;i++){ const el=document.createElement('div'); el.className='confetti-piece'; el.style.cssText=`left:${Math.random()*window.innerWidth}px;top:${window.scrollY+80}px;background:${c[Math.floor(Math.random()*c.length)]};animation:confettiFall ${1.5+Math.random()}s ease forwards;width:${6+Math.random()*8}px;height:${6+Math.random()*8}px;border-radius:${Math.random()>.5?'50%':'2px'};`; document.body.appendChild(el); el.addEventListener('animationend',()=>el.remove()); } }
 
-// Initialize
-window.addEventListener('load', () => {
-  loadPhotos();
-  loadStories();
-  loadPoems();
-  handleScrollReveal();
-  
-  const today = new Date().toISOString().split('T')[0];
-  if (document.getElementById('storyDate')) {
-    document.getElementById('storyDate').value = today;
-  }
-  
-  if (!isFirebaseReady) {
-    showToast('⚠️ Not connected to cloud. Photos and stories will not sync across devices.', true);
+// ── NAV ──────────────────────────────────────────────
+function navTo(id){ document.getElementById(id)?.scrollIntoView({behavior:'smooth'}); document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active')); event.target.classList.add('active'); }
+
+// ── SCROLL REVEAL ────────────────────────────────────
+const obs = new IntersectionObserver(entries=>entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); }),{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// ── UTIL ─────────────────────────────────────────────
+function esc(str){ if(!str) return ''; const d=document.createElement('div'); d.textContent=str; return d.innerHTML; }
+
+// ── CONFETTI KEYFRAME ────────────────────────────────
+document.head.insertAdjacentHTML('beforeend','<style>@keyframes confettiFall{0%{opacity:1;transform:translateY(0) rotate(0deg);}100%{opacity:0;transform:translateY(200px) rotate(720deg);}}</style>');
+
+// ── INIT ─────────────────────────────────────────────
+async function init() {
+  // Set today's date in story form
+  document.getElementById('storyDate').value = new Date().toISOString().split('T')[0];
+
+  // Check if window.storage is available
+  if (typeof window.storage === 'undefined') {
+    setBadge('error');
+    document.getElementById('syncBadge').title = 'window.storage not available — data saves locally only';
+    // Fallback to localStorage
+    fallbackToLocal();
   } else {
-    showToast('✨ Connected! Your memories will sync across all devices ✨');
+    setBadge('syncing');
+    try {
+      await renderPhotos();
+      await renderStories();
+      await renderPoems();
+      setBadge('synced');
+    } catch(e) {
+      console.error(e);
+      setBadge('error');
+    }
   }
-});
 
-window.addEventListener('scroll', handleScrollReveal);
+  // Hide loading screen
+  setTimeout(() => document.getElementById('loadingOverlay').classList.add('hidden'), 600);
+}
+
+// ── FALLBACK (if opened as a plain .html file) ────────
+function fallbackToLocal() {
+  // Override sget/sset to use localStorage when window.storage isn't available
+  window.sget_orig = sget; window.sset_orig = sset;
+  const lsGet = async k => { try{ const v=localStorage.getItem(k); return v?JSON.parse(v):null; }catch{return null;} };
+  const lsSet = async (k,v) => { try{ localStorage.setItem(k,JSON.stringify(v)); return true; }catch{return false;} };
+  // Patch all async storage calls
+  Object.defineProperty(window,'sget',{value:lsGet,writable:true});
+  Object.defineProperty(window,'sset',{value:lsSet,writable:true});
+  renderPhotos(); renderStories(); renderPoems();
+  setTimeout(() => document.getElementById('loadingOverlay').classList.add('hidden'), 400);
+}
+
+init();
 </script>
-
-<!-- Lightbox Modal -->
-<div id="lightbox" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:1000;align-items:center;justify-content:center;transition:opacity 0.3s;">
-  <button onclick="closeLightbox()" style="position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;">✕</button>
-  <img id="lbImg" style="max-width:90vw;max-height:80vh;object-fit:contain;border-radius:12px;" />
-  <div id="lbCaption" style="position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);color:var(--muted);font-style:italic;text-align:center;max-width:80%;background:rgba(0,0,0,0.6);padding:0.5rem 1rem;border-radius:20px;"></div>
-</div>
 </body>
 </html>
