@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>One Month with Gizzele 🌹</title>
+<title>One Month with Gizelle 🌹</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet"/>
 <style>
 :root {
@@ -520,7 +520,7 @@ footer span{color:var(--rose-lt);}
 <!-- ═══ HERO ═══ -->
 <div class="hero" id="home">
   <span class="hero-eyebrow">✨ one whole month ✨</span>
-  <h1 class="hero-title">For <em>Gizzele</em>,<br>with love.</h1>
+  <h1 class="hero-title">For <em>Gizelle</em>,<br>with love.</h1>
   <p class="hero-sub">30 days of the most beautiful kind of magic 🌹</p>
   <button class="hero-heart" id="mainHeart">💖</button>
   <p class="hero-hint">tap the heart</p>
@@ -558,7 +558,7 @@ footer span{color:var(--rose-lt);}
         <p style="font-size:0.85rem;color:var(--muted);margin-bottom:0.4rem;letter-spacing:0.08em;text-transform:uppercase;">Who is writing?</p>
         <div class="who-toggle">
           <button class="who-btn active" id="storyHimBtn" onclick="setWho('story','him')">💛 Him</button>
-          <button class="who-btn" id="storyHerBtn" onclick="setWho('story','her')">🌹 Gizzele</button>
+          <button class="who-btn" id="storyHerBtn" onclick="setWho('story','her')">🌹 Gizelle</button>
         </div>
       </div>
       <input class="form-field" id="storyTitle" placeholder="Give this memory a title…" maxlength="80"/>
@@ -588,7 +588,7 @@ footer span{color:var(--rose-lt);}
         <p style="font-size:0.85rem;color:var(--muted);margin-bottom:0.4rem;letter-spacing:0.08em;text-transform:uppercase;">Who is writing?</p>
         <div class="who-toggle">
           <button class="who-btn active" id="poemHimBtn" onclick="setWho('poem','him')">💛 Him</button>
-          <button class="who-btn" id="poemHerBtn" onclick="setWho('poem','her')">🌹 Gizzele</button>
+          <button class="who-btn" id="poemHerBtn" onclick="setWho('poem','her')">🌹 Gizelle</button>
         </div>
       </div>
       <input class="form-field" id="poemTitle" placeholder="Title of your poem…" maxlength="80"/>
@@ -607,7 +607,7 @@ footer span{color:var(--rose-lt);}
 <!-- ═══ LETTER ═══ -->
 <section class="page-section reveal" id="letter-sec">
   <span class="sec-label">from me to you</span>
-  <h2 class="sec-title">A Letter for Gizzele</h2>
+  <h2 class="sec-title">A Letter for Gizelle</h2>
   <div class="divider"></div>
   <div class="letter-card">
     <p class="letter-text">
@@ -648,7 +648,7 @@ Happy one month to us 
         <p style="font-size:0.85rem;color:var(--muted);margin-bottom:0.4rem;letter-spacing:0.08em;text-transform:uppercase;">Who is adding?</p>
         <div class="who-toggle">
           <button class="who-btn active" id="photoHimBtn" onclick="setWho('photo','him')">💛 Him</button>
-          <button class="who-btn" id="photoHerBtn" onclick="setWho('photo','her')">🌹 Gizzele</button>
+          <button class="who-btn" id="photoHerBtn" onclick="setWho('photo','her')">🌹 Gizelle</button>
         </div>
       </div>
       <button class="upload-btn" onclick="document.getElementById('photoFileInput').click()">Choose Photo</button>
@@ -863,7 +863,7 @@ function renderPoems(){
     const card = document.createElement('div');
     card.className='poem-card';
     card.innerHTML=`
-      <span class="poem-author-tag ${p.who}">${p.who==='her'?'🌹 Gizzele':'💛 Him'} · ${p.date}</span>
+      <span class="poem-author-tag ${p.who}">${p.who==='her'?'🌹 Gizelle':'💛 Him'} · ${p.date}</span>
       <div class="poem-title-disp">${p.title}</div>
       <div class="poem-body">${p.body}</div>
       <button class="poem-del" onclick="deletePoem(${p.id})" title="Delete">✕</button>
