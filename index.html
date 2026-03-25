@@ -7,338 +7,693 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet"/>
 <style>
 :root {
-  --bg:       #0d0608;
-  --surface:  #1a0b10;
-  --card:     #22101a;
-  --border:   #4a2035;
-  --rose:     #c94f6a;
-  --rose-lt:  #e8809a;
-  --gold:     #c9973a;
-  --gold-lt:  #f0d28a;
-  --cream:    #f5e8d8;
-  --muted:    #9a7080;
-  --text:     #f0dde4;
+  --bg: #0d0608;
+  --surface: #1a0b10;
+  --card: #22101a;
+  --border: #4a2035;
+  --rose: #c94f6a;
+  --rose-lt: #e8809a;
+  --gold: #c9973a;
+  --gold-lt: #f0d28a;
+  --cream: #f5e8d8;
+  --muted: #9a7080;
+  --text: #f0dde4;
 }
 
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
-
-body{
-  background:var(--bg);
-  color:var(--text);
-  font-family:'Cormorant Garamond',serif;
-  overflow-x:hidden;
-  min-height:100vh;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-#petals{position:fixed;inset:0;pointer-events:none;z-index:0;}
-
-nav{
-  position:fixed;top:0;left:0;right:0;
-  z-index:100;
-  display:flex;justify-content:center;gap:0.5rem;
-  padding:0.8rem 1rem;
-  background:rgba(13,6,8,0.85);
-  backdrop-filter:blur(12px);
-  border-bottom:1px solid rgba(201,79,106,0.2);
-  flex-wrap:wrap;
-}
-.nav-btn{
-  background:none;border:1px solid transparent;
-  color:var(--muted);
-  font-family:'Cormorant Garamond',serif;
-  font-size:0.9rem;letter-spacing:0.08em;
-  padding:0.35rem 0.9rem;border-radius:50px;
-  cursor:pointer;transition:all 0.2s;text-transform:uppercase;
-}
-.nav-btn:hover,.nav-btn.active{
-  color:var(--rose-lt);border-color:var(--rose);
+html {
+  scroll-behavior: smooth;
 }
 
-.hero{
-  min-height:100vh;
-  display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-  text-align:center;padding:2rem;
-  position:relative;z-index:1;
-  background:radial-gradient(ellipse 70% 60% at 50% 50%, rgba(201,79,106,0.12) 0%, transparent 70%);
-}
-.hero-eyebrow{
-  font-family:'Dancing Script',cursive;
-  font-size:1.3rem;color:var(--gold);
-  opacity:0;animation:fadeUp 0.8s ease 0.3s forwards;
-}
-.hero-title{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(3.5rem,11vw,8rem);
-  font-weight:700;line-height:0.95;
-  letter-spacing:-0.02em;
-  color:var(--cream);
-  opacity:0;animation:fadeUp 0.9s ease 0.6s forwards;
-}
-.hero-title em{font-style:italic;color:var(--rose-lt);}
-.hero-sub{
-  font-size:clamp(1rem,2.5vw,1.5rem);
-  font-style:italic;color:var(--muted);
-  margin-top:1.2rem;
-  opacity:0;animation:fadeUp 0.9s ease 0.9s forwards;
-}
-.hero-heart{
-  margin-top:2.5rem;font-size:4rem;
-  background:none;border:none;cursor:pointer;
-  display:inline-block;
-  opacity:0;animation:fadeUp 0.9s ease 1.2s forwards;
-  transition:transform 0.15s;
-  filter:drop-shadow(0 0 20px rgba(201,79,106,0.6));
-}
-.hero-heart:hover{transform:scale(1.3) rotate(-8deg);}
-.hero-hint{
-  font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;
-  color:var(--muted);margin-top:0.5rem;
-  opacity:0;animation:fadeUp 0.8s ease 1.5s forwards;
-}
-.scroll-cue{
-  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
-  color:var(--muted);font-size:1.6rem;
-  animation:bob 2.2s ease-in-out infinite;text-decoration:none;
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Cormorant Garamond', serif;
+  overflow-x: hidden;
+  min-height: 100vh;
 }
 
-.page-section{
-  position:relative;z-index:1;
-  max-width:960px;margin:0 auto;
-  padding:6rem 1.5rem;
-}
-.sec-label{
-  font-family:'Dancing Script',cursive;
-  font-size:1.1rem;color:var(--gold);
-  display:block;margin-bottom:0.5rem;
-}
-.sec-title{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(2rem,5vw,3rem);
-  font-weight:700;color:var(--cream);
-  line-height:1.15;
-}
-.divider{
-  width:60px;height:2px;
-  background:linear-gradient(90deg,var(--rose),var(--gold-lt));
-  margin:1.2rem 0 2rem;border-radius:2px;
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1rem;
+  background: rgba(13, 6, 8, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(201, 79, 106, 0.2);
+  flex-wrap: wrap;
 }
 
-.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s,transform 0.7s;}
-.reveal.visible{opacity:1;transform:none;}
+.nav-btn {
+  background: none;
+  border: 1px solid transparent;
+  color: var(--muted);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  padding: 0.35rem 0.9rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-transform: uppercase;
+}
+
+.nav-btn:hover,
+.nav-btn.active {
+  color: var(--rose-lt);
+  border-color: var(--rose);
+}
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  position: relative;
+  z-index: 1;
+  background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(201, 79, 106, 0.12) 0%, transparent 70%);
+}
+
+.hero-eyebrow {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.3rem;
+  color: var(--gold);
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.3s forwards;
+}
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3.5rem, 11vw, 8rem);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--cream);
+  opacity: 0;
+  animation: fadeUp 0.9s ease 0.6s forwards;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--rose-lt);
+}
+
+.hero-sub {
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  font-style: italic;
+  color: var(--muted);
+  margin-top: 1.2rem;
+  opacity: 0;
+  animation: fadeUp 0.9s ease 0.9s forwards;
+}
+
+.hero-heart {
+  margin-top: 2.5rem;
+  font-size: 4rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  opacity: 0;
+  animation: fadeUp 0.9s ease 1.2s forwards;
+  transition: transform 0.15s;
+  filter: drop-shadow(0 0 20px rgba(201, 79, 106, 0.6));
+}
+
+.hero-heart:hover {
+  transform: scale(1.3) rotate(-8deg);
+}
+
+.hero-hint {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.5rem;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 1.5s forwards;
+}
+
+.scroll-cue {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--muted);
+  font-size: 1.6rem;
+  animation: bob 2.2s ease-in-out infinite;
+  text-decoration: none;
+}
+
+.page-section {
+  position: relative;
+  z-index: 1;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 6rem 1.5rem;
+}
+
+.sec-label {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.1rem;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.sec-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  color: var(--cream);
+  line-height: 1.15;
+}
+
+.divider {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--rose), var(--gold-lt));
+  margin: 1.2rem 0 2rem;
+  border-radius: 2px;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s, transform 0.7s;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
 
 /* Photo Gallery */
-.gallery-controls{
-  display:flex;gap:1rem;align-items:center;flex-wrap:wrap;
-  margin-bottom:1.5rem;
+.gallery-controls {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
 }
 
-.upload-label{
-  display:inline-flex;align-items:center;gap:0.5rem;
-  padding:0.7rem 1.5rem;
-  background:linear-gradient(135deg,var(--rose),#a33554);
-  color:#fff;border-radius:50px;
-  font-family:'Cormorant Garamond',serif;
-  font-size:1rem;cursor:pointer;
-  transition:opacity 0.2s,transform 0.15s;
-  font-weight:600;letter-spacing:0.04em;
-  user-select:none;
-}
-.upload-label:hover{opacity:0.85;transform:scale(1.03);}
-
-#photoFileInput{
-  position:absolute;
-  width:1px;height:1px;
-  opacity:0;overflow:hidden;
-  clip:rect(0,0,0,0);
+.upload-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.5rem;
+  background: linear-gradient(135deg, var(--rose), #a33554);
+  color: #fff;
+  border-radius: 50px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  user-select: none;
 }
 
-.photo-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
-  gap:1rem;
+.upload-label:hover {
+  opacity: 0.85;
+  transform: scale(1.03);
 }
-.photo-card{
-  position:relative;border-radius:16px;overflow:hidden;
-  border:1.5px solid var(--border);
-  background:var(--card);
-  cursor:pointer;
-  transition:transform 0.3s,box-shadow 0.3s;
-  animation:popIn 0.4s ease;
-}
-.photo-card:hover{transform:scale(1.03);box-shadow:0 12px 40px rgba(201,79,106,0.25);}
-.photo-card img{width:100%;height:200px;object-fit:cover;display:block;}
-.photo-caption{
-  padding:0.8rem 1rem;
-  font-style:italic;font-size:0.9rem;color:var(--muted);
-}
-.photo-caption strong{color:var(--rose-lt);font-style:normal;font-size:0.8rem;display:block;margin-bottom:0.2rem;}
-.photo-del{
-  position:absolute;top:0.5rem;right:0.5rem;
-  background:rgba(0,0,0,0.6);border:none;
-  color:#fff;width:26px;height:26px;border-radius:50%;
-  font-size:0.75rem;cursor:pointer;
-  opacity:0;transition:opacity 0.2s;
-}
-.photo-card:hover .photo-del{opacity:1;}
 
-#captionBar{
-  display:none;
-  background:var(--surface);
-  border:1.5px solid var(--border);
-  border-radius:16px;
-  padding:1.2rem 1.4rem;
-  margin-bottom:1.5rem;
-  gap:1rem;
-  flex-wrap:wrap;
-  align-items:flex-start;
+#photoFileInput {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
 }
-#captionBar.show{display:flex;}
-#captionBar img{
-  width:100px;height:100px;object-fit:cover;
-  border-radius:10px;border:1px solid var(--border);
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
 }
-#captionBar .bar-row{flex:1;display:flex;gap:0.7rem;flex-wrap:wrap;width:100%;}
-.form-field{
-  width:100%;padding:0.85rem 1rem;
-  background:var(--card);
-  border:1.5px solid var(--border);
-  border-radius:12px;
-  color:var(--text);
-  font-family:'Cormorant Garamond',serif;
-  font-size:1rem;outline:none;
-  transition:border-color 0.2s;
+
+.photo-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1.5px solid var(--border);
+  background: var(--card);
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  animation: popIn 0.4s ease;
 }
-.form-field:focus{border-color:var(--rose);}
-textarea.form-field{resize:vertical;min-height:100px;}
+
+.photo-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 12px 40px rgba(201, 79, 106, 0.25);
+}
+
+.photo-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.photo-caption {
+  padding: 0.8rem 1rem;
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.photo-caption strong {
+  color: var(--rose-lt);
+  font-style: normal;
+  font-size: 0.8rem;
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.photo-del {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: rgba(0, 0, 0, 0.6);
+  border: none;
+  color: #fff;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s;
+  z-index: 10;
+}
+
+.photo-card:hover .photo-del {
+  opacity: 1;
+}
+
+#captionBar {
+  display: none;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  padding: 1.2rem 1.4rem;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+#captionBar.show {
+  display: flex;
+}
+
+#captionBar img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+
+#captionBar .bar-row {
+  flex: 1;
+  display: flex;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.form-field {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  background: var(--card);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  color: var(--text);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-field:focus {
+  border-color: var(--rose);
+}
+
+textarea.form-field {
+  resize: vertical;
+  min-height: 100px;
+}
 
 /* Stories & Poems */
-.story-form{
-  background:var(--surface);
-  border:1.5px solid var(--border);
-  border-radius:20px;
-  padding:1.8rem;
-  margin-bottom:2rem;
+.story-form {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  padding: 1.8rem;
+  margin-bottom: 2rem;
 }
-.story-form h3{
-  font-family:'Playfair Display',serif;
-  font-size:1.3rem;color:var(--cream);
-  margin-bottom:1.2rem;font-style:italic;
-}
-.form-row{display:flex;flex-direction:column;gap:0.8rem;}
-.who-toggle{display:flex;gap:0.5rem;}
-.who-btn{
-  flex:1;padding:0.5rem;
-  background:var(--card);
-  border:1.5px solid var(--border);
-  color:var(--muted);
-  border-radius:8px;cursor:pointer;
-  font-family:'Cormorant Garamond',serif;
-  font-size:0.95rem;transition:all 0.2s;
-}
-.who-btn.active{background:var(--rose);border-color:var(--rose);color:#fff;}
 
-.submit-btn{
-  padding:0.8rem 2rem;
-  background:linear-gradient(135deg,var(--gold),#a07010);
-  color:#fff;border:none;border-radius:50px;
-  font-family:'Cormorant Garamond',serif;
-  font-size:1rem;font-weight:600;
-  cursor:pointer;letter-spacing:0.05em;
-  transition:opacity 0.2s,transform 0.15s;
-  margin-top:0.5rem;align-self:flex-start;
+.story-form h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  color: var(--cream);
+  margin-bottom: 1.2rem;
+  font-style: italic;
 }
-.submit-btn:hover{opacity:0.85;transform:scale(1.03);}
 
-.story-list,.poem-list{display:flex;flex-direction:column;gap:1.5rem;}
-.story-card,.poem-card{
-  background:var(--surface);
-  border:1.5px solid var(--border);
-  border-radius:18px;
-  padding:1.6rem;
-  animation:popIn 0.4s ease;
-  position:relative;
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
 }
-.story-card.by-her{border-left:3px solid var(--rose);}
-.story-card.by-him{border-left:3px solid var(--gold);}
-.story-meta{
-  display:flex;justify-content:space-between;align-items:center;
-  margin-bottom:0.8rem;flex-wrap:wrap;gap:0.5rem;
+
+.who-toggle {
+  display: flex;
+  gap: 0.5rem;
 }
-.story-author{font-family:'Dancing Script',cursive;font-size:1.1rem;}
-.story-author.her{color:var(--rose-lt);}
-.story-author.him{color:var(--gold-lt);}
-.story-date{font-size:0.8rem;color:var(--muted);letter-spacing:0.05em;}
-.story-title-disp{
-  font-family:'Playfair Display',serif;
-  font-size:1.2rem;color:var(--cream);
-  font-style:italic;margin-bottom:0.6rem;
+
+.who-btn {
+  flex: 1;
+  padding: 0.5rem;
+  background: var(--card);
+  border: 1.5px solid var(--border);
+  color: var(--muted);
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.95rem;
+  transition: all 0.2s;
 }
-.story-body{font-size:1rem;line-height:1.8;color:var(--text);white-space:pre-line;}
-.poem-body{font-size:1rem;line-height:1.8;color:var(--text);white-space:pre-line;font-style:italic;}
-.story-del,.poem-del{
-  position:absolute;top:1rem;right:1rem;
-  background:none;border:none;
-  color:var(--muted);cursor:pointer;font-size:0.9rem;
-  transition:color 0.2s;
+
+.who-btn.active {
+  background: var(--rose);
+  border-color: var(--rose);
+  color: #fff;
 }
-.story-del:hover,.poem-del:hover{color:var(--rose);}
+
+.submit-btn {
+  padding: 0.8rem 2rem;
+  background: linear-gradient(135deg, var(--gold), #a07010);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  transition: opacity 0.2s, transform 0.15s;
+  margin-top: 0.5rem;
+  align-self: flex-start;
+}
+
+.submit-btn:hover {
+  opacity: 0.85;
+  transform: scale(1.03);
+}
+
+.submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.story-list,
+.poem-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.story-card,
+.poem-card {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 18px;
+  padding: 1.6rem;
+  animation: popIn 0.4s ease;
+  position: relative;
+}
+
+.story-card.by-her {
+  border-left: 3px solid var(--rose);
+}
+
+.story-card.by-him {
+  border-left: 3px solid var(--gold);
+}
+
+.story-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.story-author {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.1rem;
+}
+
+.story-author.her {
+  color: var(--rose-lt);
+}
+
+.story-author.him {
+  color: var(--gold-lt);
+}
+
+.story-date {
+  font-size: 0.8rem;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+
+.story-title-disp {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  color: var(--cream);
+  font-style: italic;
+  margin-bottom: 0.6rem;
+}
+
+.story-body {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--text);
+  white-space: pre-line;
+}
+
+.poem-body {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--text);
+  white-space: pre-line;
+  font-style: italic;
+}
+
+.story-del,
+.poem-del {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+.story-del:hover,
+.poem-del:hover {
+  color: var(--rose);
+}
 
 /* Letter */
-.letter-card{
-  background:var(--surface);
-  border:1.5px solid var(--border);
-  border-radius:20px;
-  padding:3rem;
-  position:relative;
-  box-shadow:0 8px 40px rgba(0,0,0,0.4);
+.letter-card {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  padding: 3rem;
+  position: relative;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
 }
-.letter-card::before{
-  content:'✉';
-  position:absolute;top:-1rem;left:50%;transform:translateX(-50%);
-  font-size:1.8rem;background:var(--bg);padding:0 0.6rem;
+
+.letter-card::before {
+  content: '✉';
+  position: absolute;
+  top: -1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.8rem;
+  background: var(--bg);
+  padding: 0 0.6rem;
 }
-.letter-text{font-size:clamp(1.05rem,2vw,1.2rem);line-height:2;color:var(--text);font-style:italic;}
-.letter-sig{margin-top:2rem;text-align:right;font-family:'Dancing Script',cursive;font-size:1.8rem;color:var(--rose-lt);}
+
+.letter-text {
+  font-size: clamp(1.05rem, 2vw, 1.2rem);
+  line-height: 2;
+  color: var(--text);
+  font-style: italic;
+}
+
+.letter-sig {
+  margin-top: 2rem;
+  text-align: right;
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.8rem;
+  color: var(--rose-lt);
+}
 
 /* Effects */
-.fheart{position:fixed;pointer-events:none;z-index:999;font-size:1.4rem;animation:floatUp 1.4s ease forwards;}
-.empty-state{
-  text-align:center;padding:3rem;
-  color:var(--muted);font-style:italic;
-  border:1.5px dashed var(--border);
-  border-radius:16px;font-size:1.05rem;
+.fheart {
+  position: fixed;
+  pointer-events: none;
+  z-index: 999;
+  font-size: 1.4rem;
+  animation: floatUp 1.4s ease forwards;
 }
 
-.toast{
-  position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(20px);
-  background:var(--rose);color:#fff;
-  padding:0.7rem 1.5rem;border-radius:50px;
-  font-family:'Dancing Script',cursive;font-size:1.1rem;
-  z-index:500;opacity:0;transition:all 0.3s;pointer-events:none;
-  white-space:nowrap;
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  color: var(--muted);
+  font-style: italic;
+  border: 1.5px dashed var(--border);
+  border-radius: 16px;
+  font-size: 1.05rem;
 }
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
-footer{text-align:center;padding:4rem 2rem 3rem;position:relative;z-index:1;font-family:'Dancing Script',cursive;font-size:1.6rem;color:var(--muted);}
-footer span{color:var(--rose-lt);}
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--rose);
+  color: #fff;
+  padding: 0.7rem 1.5rem;
+  border-radius: 50px;
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.1rem;
+  z-index: 500;
+  opacity: 0;
+  transition: all 0.3s;
+  pointer-events: none;
+  white-space: nowrap;
+}
 
-@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:none;}}
-@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(8px);}}
-@keyframes floatUp{0%{opacity:1;transform:translateY(0) scale(1);}100%{opacity:0;transform:translateY(-90px) scale(1.8);}}
-@keyframes popIn{from{opacity:0;transform:scale(0.88);}to{opacity:1;transform:scale(1);}}
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
 
-@media(max-width:600px){
-  .photo-grid{grid-template-columns:repeat(2,1fr);}
-  .letter-card{padding:2rem 1.2rem;}
-  .toast{white-space:normal;max-width:90%;text-align:center;}
+.sync-status {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  color: var(--muted);
+  z-index: 100;
+  pointer-events: none;
+}
+
+footer {
+  text-align: center;
+  padding: 4rem 2rem 3rem;
+  position: relative;
+  z-index: 1;
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.6rem;
+  color: var(--muted);
+}
+
+footer span {
+  color: var(--rose-lt);
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(8px);
+  }
+}
+
+@keyframes floatUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-90px) scale(1.8);
+  }
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.88);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 600px) {
+  .photo-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .letter-card {
+    padding: 2rem 1.2rem;
+  }
+  .toast {
+    white-space: normal;
+    max-width: 90%;
+    text-align: center;
+  }
 }
 </style>
 </head>
 <body>
 
 <div class="toast" id="toast"></div>
+<div class="sync-status" id="syncStatus">🔄 Connecting...</div>
 
 <nav>
   <button class="nav-btn active" onclick="scrollToSection('home')">🌹 Home</button>
@@ -365,12 +720,12 @@ footer span{color:var(--rose-lt);}
 
   <div class="gallery-controls">
     <label class="upload-label" for="photoFileInput">📸 Add a Photo</label>
-    <input type="file" id="photoFileInput" accept="image/*"/>
-    <span style="color:var(--muted);font-style:italic;font-size:0.95rem;">Every picture tells our story ✨</span>
+    <input type="file" id="photoFileInput" accept="image/*" />
+    <span style="color:var(--muted);font-style:italic;font-size:0.95rem;">✨ Syncs across all devices ✨</span>
   </div>
 
   <div id="captionBar">
-    <img id="barPreview" src="" alt="Preview"/>
+    <img id="barPreview" src="" alt="Preview" />
     <div class="bar-row">
       <div style="width:100%">
         <p style="font-size:0.8rem;color:var(--muted);margin-bottom:0.4rem;">Who is adding?</p>
@@ -379,9 +734,9 @@ footer span{color:var(--rose-lt);}
           <button class="who-btn" id="photoHerBtn" onclick="setPhotoWho('her')">🌹 Gizelle</button>
         </div>
       </div>
-      <input class="form-field" id="photoCaptionInput" placeholder="Write a caption… what made this moment special?" maxlength="120"/>
+      <input class="form-field" id="photoCaptionInput" placeholder="Write a caption… what made this moment special?" maxlength="120" />
       <div style="display:flex;gap:0.7rem;flex-wrap:wrap;">
-        <button class="submit-btn" onclick="savePhoto()">Add to Gallery ✨</button>
+        <button class="submit-btn" id="savePhotoBtn" onclick="savePhoto()">Add to Gallery ✨</button>
         <button onclick="cancelPhoto()" style="padding:0.8rem 1.4rem;background:none;border:1.5px solid var(--border);color:var(--muted);border-radius:50px;cursor:pointer;">Cancel</button>
       </div>
     </div>
@@ -406,8 +761,8 @@ footer span{color:var(--rose-lt);}
           <button class="who-btn" id="storyHerBtn" onclick="setStoryWho('her')">🌹 Gizelle</button>
         </div>
       </div>
-      <input class="form-field" id="storyTitle" placeholder="Give this memory a title…" maxlength="80"/>
-      <input class="form-field" id="storyDate" type="date"/>
+      <input class="form-field" id="storyTitle" placeholder="Give this memory a title…" maxlength="80" />
+      <input class="form-field" id="storyDate" type="date" />
       <textarea class="form-field" id="storyBody" placeholder="Tell the story… What happened? How did it feel? Why will you never forget it?" rows="5"></textarea>
       <button class="submit-btn" onclick="addStory()">Post Memory ✨</button>
     </div>
@@ -432,7 +787,7 @@ footer span{color:var(--rose-lt);}
           <button class="who-btn" id="poemHerBtn" onclick="setPoemWho('her')">🌹 Gizelle</button>
         </div>
       </div>
-      <input class="form-field" id="poemTitle" placeholder="Title of your poem…" maxlength="80"/>
+      <input class="form-field" id="poemTitle" placeholder="Title of your poem…" maxlength="80" />
       <textarea class="form-field" id="poemBody" placeholder="Write your poem here…&#10;Each line on its own row.&#10;&#10;Let your heart speak freely. 🌹" rows="8"></textarea>
       <button class="submit-btn" onclick="addPoem()">Publish Poem 🌹</button>
     </div>
@@ -481,22 +836,42 @@ const firebaseConfig = {
   appId: "1:735599080890:web:aa7bf85fd3256953d25983"
 };
 
-firebase.initializeApp(firebaseConfig);
-const storage = firebase.storage();
-const db = firebase.firestore();
+// Initialize Firebase
+let db, storage;
+let isFirebaseReady = false;
+
+try {
+  const app = firebase.initializeApp(firebaseConfig);
+  db = firebase.firestore(app);
+  storage = firebase.storage(app);
+  isFirebaseReady = true;
+  document.getElementById('syncStatus').innerHTML = '☁️ Synced to Cloud';
+  document.getElementById('syncStatus').style.color = '#c94f6a';
+  console.log('✅ Firebase connected successfully');
+} catch (error) {
+  console.error('❌ Firebase connection failed:', error);
+  document.getElementById('syncStatus').innerHTML = '⚠️ Offline Mode';
+  document.getElementById('syncStatus').style.color = '#c9973a';
+  showToast('Running in offline mode. Photos will not sync across devices.', true);
+}
 
 // Global State
+let photoWho = 'him';
 let storyWho = 'him';
 let poemWho = 'him';
-let photoWho = 'him';
 let selectedFile = null;
+let selectedPreviewUrl = null;
 
 // Helper Functions
-function showToast(message) {
+function showToast(message, isError = false) {
   const toast = document.getElementById('toast');
   toast.textContent = message;
+  toast.style.background = isError ? '#a33554' : 'var(--rose)';
   toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 3000);
+  setTimeout(() => {
+    toast.classList.remove('show');
+    toast.style.background = 'var(--rose)';
+  }, 3000);
 }
 
 function scrollToSection(id) {
@@ -518,7 +893,14 @@ function createHeart() {
   setTimeout(() => heart.remove(), 1400);
 }
 
-// Photo Functions
+function escapeHtml(str) {
+  if (!str) return '';
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+// ========== PHOTO FUNCTIONS ==========
 function setPhotoWho(who) {
   photoWho = who;
   document.getElementById('photoHimBtn').classList.toggle('active', who === 'him');
@@ -526,47 +908,68 @@ function setPhotoWho(who) {
 }
 
 async function savePhoto() {
-  if (!selectedFile) {
-    showToast('Please select a photo first!');
+  if (!selectedFile || !selectedPreviewUrl) {
+    showToast('Please select a photo first!', true);
+    return;
+  }
+
+  if (!isFirebaseReady) {
+    showToast('Cannot upload: Not connected to cloud. Please check your internet.', true);
     return;
   }
 
   const caption = document.getElementById('photoCaptionInput').value.trim();
-  const fileName = Date.now() + '_' + selectedFile.name;
-  const storageRef = storage.ref('photos/' + fileName);
+  const saveBtn = document.getElementById('savePhotoBtn');
+  saveBtn.disabled = true;
+  saveBtn.textContent = 'Uploading...';
 
   try {
-    showToast('Uploading photo...');
-    await storageRef.put(selectedFile);
-    const url = await storageRef.getDownloadURL();
+    // Create unique filename
+    const fileName = `${Date.now()}_${selectedFile.name}`;
+    const storageRef = storage.ref(`photos/${fileName}`);
     
+    // Upload file
+    const uploadTask = await storageRef.put(selectedFile);
+    const downloadURL = await uploadTask.ref.getDownloadURL();
+    
+    // Save to Firestore
     await db.collection('photos').add({
-      src: url,
+      src: downloadURL,
       caption: caption || '✨ A beautiful moment ✨',
       who: photoWho,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-      date: new Date().toISOString()
+      date: new Date().toLocaleDateString()
     });
     
+    showToast('Photo uploaded! 🌹 It will appear on all devices');
     cancelPhoto();
     loadPhotos();
-    showToast('Photo added! 🌹');
   } catch (error) {
-    console.error('Error uploading photo:', error);
-    showToast('Failed to upload photo. Please try again.');
+    console.error('Upload error:', error);
+    showToast('Upload failed: ' + (error.message || 'Please try again'), true);
+  } finally {
+    saveBtn.disabled = false;
+    saveBtn.textContent = 'Add to Gallery ✨';
   }
 }
 
 function cancelPhoto() {
   selectedFile = null;
+  selectedPreviewUrl = null;
   document.getElementById('captionBar').classList.remove('show');
   document.getElementById('photoCaptionInput').value = '';
   document.getElementById('photoFileInput').value = '';
+  document.getElementById('barPreview').src = '';
 }
 
 async function loadPhotos() {
   const grid = document.getElementById('photoGrid');
   grid.innerHTML = '';
+  
+  if (!isFirebaseReady) {
+    grid.innerHTML = '<div class="empty-state">⚠️ Cannot load photos: Not connected to cloud. Please check your internet connection.</div>';
+    return;
+  }
   
   try {
     const snapshot = await db.collection('photos').orderBy('timestamp', 'desc').get();
@@ -587,10 +990,10 @@ async function loadPhotos() {
       };
       
       card.innerHTML = `
-        <img src="${photo.src}" alt="Memory" loading="lazy"/>
+        <img src="${photo.src}" alt="Memory" loading="lazy" onerror="this.src='https://via.placeholder.com/300x200?text=Image+Loading+Error'"/>
         <div class="photo-caption">
-          <strong>${photo.who === 'her' ? '🌹 Gizelle' : '💛 Prince'}</strong>
-          ${photo.caption || '✨ A beautiful moment ✨'}
+          <strong>${photo.who === 'her' ? '🌹 Gizelle' : '💛 Prince'} · ${photo.date || 'recent'}</strong>
+          ${escapeHtml(photo.caption)}
         </div>
         <button class="photo-del" onclick="deletePhoto('${doc.id}', event)">🗑️</button>
       `;
@@ -598,25 +1001,30 @@ async function loadPhotos() {
     });
   } catch (error) {
     console.error('Error loading photos:', error);
-    grid.innerHTML = '<div class="empty-state">Error loading photos. Please refresh.</div>';
+    grid.innerHTML = '<div class="empty-state">Error loading photos. Please refresh the page.</div>';
   }
 }
 
 async function deletePhoto(photoId, event) {
   event.stopPropagation();
-  if (confirm('Delete this memory?')) {
-    try {
-      await db.collection('photos').doc(photoId).delete();
-      loadPhotos();
-      showToast('Photo removed.');
-    } catch (error) {
-      console.error('Error deleting photo:', error);
-      showToast('Failed to delete photo.');
-    }
+  if (!confirm('Delete this memory forever?')) return;
+  
+  if (!isFirebaseReady) {
+    showToast('Cannot delete: Not connected to cloud', true);
+    return;
+  }
+  
+  try {
+    await db.collection('photos').doc(photoId).delete();
+    showToast('Photo deleted');
+    loadPhotos();
+  } catch (error) {
+    console.error('Delete error:', error);
+    showToast('Failed to delete photo', true);
   }
 }
 
-// Story Functions
+// ========== STORY FUNCTIONS ==========
 function setStoryWho(who) {
   storyWho = who;
   document.getElementById('storyHimBtn').classList.toggle('active', who === 'him');
@@ -626,10 +1034,15 @@ function setStoryWho(who) {
 async function addStory() {
   const title = document.getElementById('storyTitle').value.trim();
   const body = document.getElementById('storyBody').value.trim();
-  const date = document.getElementById('storyDate').value;
+  const date = document.getElementById('storyDate').value || new Date().toLocaleDateString();
   
   if (!title || !body) {
-    showToast('Please fill in both title and story!');
+    showToast('Please fill in both title and story!', true);
+    return;
+  }
+  
+  if (!isFirebaseReady) {
+    showToast('Cannot save: Not connected to cloud', true);
     return;
   }
   
@@ -638,24 +1051,28 @@ async function addStory() {
       title: title,
       body: body,
       who: storyWho,
-      date: date || new Date().toLocaleDateString(),
+      date: date,
       timestamp: firebase.firestore.FieldValue.serverTimestamp()
     });
     
     document.getElementById('storyTitle').value = '';
     document.getElementById('storyBody').value = '';
-    document.getElementById('storyDate').value = '';
+    showToast('Story saved! 📖 It will appear on all devices');
     loadStories();
-    showToast('Memory saved! 📖');
   } catch (error) {
-    console.error('Error adding story:', error);
-    showToast('Failed to save story.');
+    console.error('Error saving story:', error);
+    showToast('Failed to save story', true);
   }
 }
 
 async function loadStories() {
   const list = document.getElementById('storyList');
   list.innerHTML = '';
+  
+  if (!isFirebaseReady) {
+    list.innerHTML = '<div class="empty-state">⚠️ Cannot load stories: Not connected to cloud</div>';
+    return;
+  }
   
   try {
     const snapshot = await db.collection('stories').orderBy('timestamp', 'desc').get();
@@ -684,25 +1101,24 @@ async function loadStories() {
     });
   } catch (error) {
     console.error('Error loading stories:', error);
-    list.innerHTML = '<div class="empty-state">Error loading stories.</div>';
+    list.innerHTML = '<div class="empty-state">Error loading stories</div>';
   }
 }
 
 async function deleteStory(storyId, event) {
   event.stopPropagation();
-  if (confirm('Delete this story?')) {
-    try {
-      await db.collection('stories').doc(storyId).delete();
-      loadStories();
-      showToast('Story removed.');
-    } catch (error) {
-      console.error('Error deleting story:', error);
-      showToast('Failed to delete story.');
-    }
+  if (!confirm('Delete this story?')) return;
+  
+  try {
+    await db.collection('stories').doc(storyId).delete();
+    showToast('Story deleted');
+    loadStories();
+  } catch (error) {
+    showToast('Failed to delete story', true);
   }
 }
 
-// Poem Functions
+// ========== POEM FUNCTIONS ==========
 function setPoemWho(who) {
   poemWho = who;
   document.getElementById('poemHimBtn').classList.toggle('active', who === 'him');
@@ -714,7 +1130,12 @@ async function addPoem() {
   const body = document.getElementById('poemBody').value.trim();
   
   if (!title || !body) {
-    showToast('Please fill in both title and poem!');
+    showToast('Please fill in both title and poem!', true);
+    return;
+  }
+  
+  if (!isFirebaseReady) {
+    showToast('Cannot save: Not connected to cloud', true);
     return;
   }
   
@@ -723,23 +1144,28 @@ async function addPoem() {
       title: title,
       body: body,
       who: poemWho,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-      date: new Date().toLocaleDateString()
+      date: new Date().toLocaleDateString(),
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
     });
     
     document.getElementById('poemTitle').value = '';
     document.getElementById('poemBody').value = '';
+    showToast('Poem published! 🌹 It will appear on all devices');
     loadPoems();
-    showToast('Poem published! 🌹');
   } catch (error) {
-    console.error('Error adding poem:', error);
-    showToast('Failed to save poem.');
+    console.error('Error saving poem:', error);
+    showToast('Failed to save poem', true);
   }
 }
 
 async function loadPoems() {
   const list = document.getElementById('poemList');
   list.innerHTML = '';
+  
+  if (!isFirebaseReady) {
+    list.innerHTML = '<div class="empty-state">⚠️ Cannot load poems: Not connected to cloud</div>';
+    return;
+  }
   
   try {
     const snapshot = await db.collection('poems').orderBy('timestamp', 'desc').get();
@@ -765,21 +1191,20 @@ async function loadPoems() {
     });
   } catch (error) {
     console.error('Error loading poems:', error);
-    list.innerHTML = '<div class="empty-state">Error loading poems.</div>';
+    list.innerHTML = '<div class="empty-state">Error loading poems</div>';
   }
 }
 
 async function deletePoem(poemId, event) {
   event.stopPropagation();
-  if (confirm('Delete this poem?')) {
-    try {
-      await db.collection('poems').doc(poemId).delete();
-      loadPoems();
-      showToast('Poem removed.');
-    } catch (error) {
-      console.error('Error deleting poem:', error);
-      showToast('Failed to delete poem.');
-    }
+  if (!confirm('Delete this poem?')) return;
+  
+  try {
+    await db.collection('poems').doc(poemId).delete();
+    showToast('Poem deleted');
+    loadPoems();
+  } catch (error) {
+    showToast('Failed to delete poem', true);
   }
 }
 
@@ -804,13 +1229,6 @@ function closeLightbox() {
   }, 300);
 }
 
-// Escape HTML to prevent XSS
-function escapeHtml(str) {
-  const div = document.createElement('div');
-  div.textContent = str;
-  return div.innerHTML;
-}
-
 // Scroll Reveal
 function handleScrollReveal() {
   const reveals = document.querySelectorAll('.reveal');
@@ -825,14 +1243,22 @@ function handleScrollReveal() {
   });
 }
 
-// File input change handler
+// File input handler
 document.getElementById('photoFileInput').addEventListener('change', function(e) {
   selectedFile = e.target.files[0];
   if (!selectedFile) return;
   
+  // Check file size (max 5MB)
+  if (selectedFile.size > 5 * 1024 * 1024) {
+    showToast('Photo too large! Please choose an image under 5MB.', true);
+    this.value = '';
+    return;
+  }
+  
   const reader = new FileReader();
   reader.onload = function(e) {
-    document.getElementById('barPreview').src = e.target.result;
+    selectedPreviewUrl = e.target.result;
+    document.getElementById('barPreview').src = selectedPreviewUrl;
     document.getElementById('captionBar').classList.add('show');
   };
   reader.readAsDataURL(selectedFile);
@@ -879,10 +1305,15 @@ window.addEventListener('load', () => {
   loadPoems();
   handleScrollReveal();
   
-  // Set default dates
   const today = new Date().toISOString().split('T')[0];
   if (document.getElementById('storyDate')) {
     document.getElementById('storyDate').value = today;
+  }
+  
+  if (!isFirebaseReady) {
+    showToast('⚠️ Not connected to cloud. Photos and stories will not sync across devices.', true);
+  } else {
+    showToast('✨ Connected! Your memories will sync across all devices ✨');
   }
 });
 
@@ -892,7 +1323,7 @@ window.addEventListener('scroll', handleScrollReveal);
 <!-- Lightbox Modal -->
 <div id="lightbox" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:1000;align-items:center;justify-content:center;transition:opacity 0.3s;">
   <button onclick="closeLightbox()" style="position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;">✕</button>
-  <img id="lbImg" style="max-width:90vw;max-height:80vh;object-fit:contain;border-radius:12px;"/>
+  <img id="lbImg" style="max-width:90vw;max-height:80vh;object-fit:contain;border-radius:12px;" />
   <div id="lbCaption" style="position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);color:var(--muted);font-style:italic;text-align:center;max-width:80%;background:rgba(0,0,0,0.6);padding:0.5rem 1rem;border-radius:20px;"></div>
 </div>
 </body>
