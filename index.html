@@ -541,284 +541,197 @@ footer span{color:var(--rose-lt);}
   <img id="lbImg" src="" alt=""/>
   <div class="lb-caption" id="lbCaption"></div>
 </div>
+<!-- FIREBASE -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-storage-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 
 <script>
-// ── STATE ──────────────────────────────────────────────────────
-const STORAGE_KEY = 'gizelle_anniversary_v2';
-function loadData(){ try{ return JSON.parse(localStorage.getItem(STORAGE_KEY))||{photos:[],stories:[],poems:[]}; }catch{ return {photos:[],stories:[],poems:[]}; } }
-function saveData(d){
-  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(d)); }
-  catch(e){ showToast('Storage full — delete some photos to add more!'); }
-}
+const firebaseConfig = {
+  apiKey: "AIzaSyCmX8Bb1NljgJ159vf1gZRX5lqNyBiIurw",
+  authDomain: "microlink-253b3.firebaseapp.com",
+  projectId: "microlink-253b3",
+  storageBucket: "microlink-253b3.appspot.com",
+  messagingSenderId: "735599080890",
+  appId: "1:735599080890:web:aa7bf85fd3256953d25983"
+};
 
-let state    = loadData();
+firebase.initializeApp(firebaseConfig);
+
+const storage = firebase.storage();
+const db = firebase.firestore();
+</script>
+
+<script>
+// ── GLOBAL STATE ─────────────────────────────────────────────
 let storyWho = 'him';
 let poemWho  = 'him';
 let photoWho = 'him';
-let pendingDataURL = null;
+let selectedFile = null;
 
-// ── NAVIGATION ────────────────────────────────────────────────
-function scrollTo(id){
-  const map = {home:'home',photos:'photos-sec',stories:'stories-sec',poems:'poems-sec',letter:'letter-sec'};
-  document.getElementById(map[id]||id)?.scrollIntoView({behavior:'smooth'});
-  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
-  event.target.classList.add('active');
-}
+// ── IMAGE SELECT ─────────────────────────────────────────────
+document.getElementById('photoFileInput').addEventListener('change', function(e){
+  selectedFile = e.target.files[0];
+  if(!selectedFile) return;
 
-// ── WHO TOGGLE ────────────────────────────────────────────────
-function setWho(sec, who){
-  if(sec==='story'){ storyWho=who; document.getElementById('storyHimBtn').classList.toggle('active',who==='him'); document.getElementById('storyHerBtn').classList.toggle('active',who==='her'); }
-  if(sec==='poem'){  poemWho=who;  document.getElementById('poemHimBtn').classList.toggle('active',who==='him');  document.getElementById('poemHerBtn').classList.toggle('active',who==='her');  }
-  if(sec==='photo'){ photoWho=who; document.getElementById('photoHimBtn').classList.toggle('active',who==='him'); document.getElementById('photoHerBtn').classList.toggle('active',who==='her'); }
-}
-
-// ── TOAST ─────────────────────────────────────────────────────
-function showToast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2800); }
-
-// ── IMAGE COMPRESSION ─────────────────────────────────────────
-// Shrinks photos to max 900px and compresses to JPEG 0.75
-// This prevents localStorage from filling up with huge images
-function compressImage(file, cb){
   const reader = new FileReader();
   reader.onload = e => {
-    const img = new Image();
-    img.onload = () => {
-      const MAX = 900;
-      let w = img.width, h = img.height;
-      if(w > MAX || h > MAX){
-        if(w > h){ h = Math.round(h * MAX / w); w = MAX; }
-        else      { w = Math.round(w * MAX / h); h = MAX; }
-      }
-      const canvas = document.createElement('canvas');
-      canvas.width = w; canvas.height = h;
-      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-      cb(canvas.toDataURL('image/jpeg', 0.75));
-    };
-    img.src = e.target.result;
-  };
-  reader.readAsDataURL(file);
-}
-
-// ── FILE INPUT → PREVIEW ──────────────────────────────────────
-// The <label for="photoFileInput"> in the HTML is what opens this.
-// No JS tricks needed — it's native browser behaviour.
-document.getElementById('photoFileInput').addEventListener('change', function(e){
-  const file = e.target.files[0];
-  if(!file) return;
-  showToast('Loading image…');
-  compressImage(file, dataURL => {
-    pendingDataURL = dataURL;
-    document.getElementById('barPreview').src = dataURL;
+    document.getElementById('barPreview').src = e.target.result;
     document.getElementById('captionBar').classList.add('show');
-    document.getElementById('photoCaptionInput').focus();
-    showToast('Photo ready! Add a caption and tap "Add to Gallery" ✨');
-  });
-  // Reset so same file can be picked again later
-  e.target.value = '';
+  };
+  reader.readAsDataURL(selectedFile);
 });
 
-// ── SAVE / CANCEL PHOTO ───────────────────────────────────────
-function savePhoto(){
-  if(!pendingDataURL){ showToast('Please choose a photo first! 📸'); return; }
-  const caption = document.getElementById('photoCaptionInput').value.trim();
-  const photo = {
-    id: Date.now(), src: pendingDataURL, caption, who: photoWho,
-    date: new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})
-  };
-  state.photos.unshift(photo);
-  saveData(state); renderPhotos(); cancelPhoto();
-  showToast('Photo added! 📸✨'); spawnConfetti();
-}
-function cancelPhoto(){
-  pendingDataURL = null;
-  document.getElementById('captionBar').classList.remove('show');
-  document.getElementById('barPreview').src = '';
-  document.getElementById('photoCaptionInput').value = '';
-}
-
-// ── RENDER PHOTOS ─────────────────────────────────────────────
-function renderPhotos(){
-  const grid = document.getElementById('photoGrid');
-  grid.innerHTML = '';
-  if(!state.photos.length){
-    grid.innerHTML = '<div class="empty-state">No photos yet — add your first memory together! 🌹</div>';
+// ── SAVE PHOTO (UPLOAD TO FIREBASE) ──────────────────────────
+async function savePhoto(){
+  if(!selectedFile){
+    alert("Select a photo first!");
     return;
   }
-  state.photos.forEach(p => {
+
+  const caption = document.getElementById('photoCaptionInput').value;
+
+  const fileName = Date.now() + "_" + selectedFile.name;
+  const storageRef = storage.ref('photos/' + fileName);
+
+  // Upload file
+  await storageRef.put(selectedFile);
+
+  // Get URL
+  const url = await storageRef.getDownloadURL();
+
+  // Save to Firestore
+  await db.collection("photos").add({
+    src: url,
+    caption: caption,
+    who: photoWho,
+    date: new Date().toLocaleDateString()
+  });
+
+  cancelPhoto();
+  loadPhotos();
+}
+
+// ── LOAD PHOTOS FROM FIREBASE ────────────────────────────────
+async function loadPhotos(){
+  const grid = document.getElementById('photoGrid');
+  grid.innerHTML = "";
+
+  const snapshot = await db.collection("photos").orderBy("date","desc").get();
+
+  if(snapshot.empty){
+    grid.innerHTML = '<div class="empty-state">No photos yet 🌹</div>';
+    return;
+  }
+
+  snapshot.forEach(doc => {
+    const p = doc.data();
+
     const card = document.createElement('div');
     card.className = 'photo-card';
     card.innerHTML = `
-      <img src="${p.src}" alt="${p.caption||''}" loading="lazy"/>
+      <img src="${p.src}"/>
       <div class="photo-caption">
-        <strong>${p.who==='her'?'🌹 Gizelle':'💛 Prince'} · ${p.date||''}</strong>
-        ${p.caption||''}
+        <strong>${p.who==='her'?'🌹 Gizelle':'💛 Prince'} · ${p.date}</strong>
+        ${p.caption}
       </div>
-      <button class="photo-del" title="Remove">✕</button>
     `;
-    card.querySelector('img').addEventListener('click', () => openLightbox(p.src, p.caption));
-    card.querySelector('.photo-del').addEventListener('click', e => {
-      e.stopPropagation();
-      if(!confirm('Remove this photo?')) return;
-      state.photos = state.photos.filter(x => x.id !== p.id);
-      saveData(state); renderPhotos();
-    });
+
     grid.appendChild(card);
   });
 }
 
-// ── LIGHTBOX ──────────────────────────────────────────────────
-function openLightbox(src, caption){
-  document.getElementById('lbImg').src = src;
-  document.getElementById('lbCaption').textContent = caption||'';
-  document.getElementById('lightbox').classList.add('open');
+// ── CANCEL PHOTO ─────────────────────────────────────────────
+function cancelPhoto(){
+  selectedFile = null;
+  document.getElementById('captionBar').classList.remove('show');
+  document.getElementById('photoCaptionInput').value = '';
 }
-function closeLightbox(){ document.getElementById('lightbox').classList.remove('open'); }
 
-// ── STORIES ───────────────────────────────────────────────────
-function addStory(){
-  const title = document.getElementById('storyTitle').value.trim();
-  const body  = document.getElementById('storyBody').value.trim();
-  const date  = document.getElementById('storyDate').value;
-  if(!title||!body){ showToast('Please fill in the title and story! 📖'); return; }
-  state.stories.unshift({
-    id:Date.now(), title, body, who:storyWho,
-    date: date ? new Date(date).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})
-               : new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}),
-    likes:0, liked:false
+// ── STORIES (FIRESTORE) ──────────────────────────────────────
+async function addStory(){
+  const title = document.getElementById('storyTitle').value;
+  const body  = document.getElementById('storyBody').value;
+
+  if(!title || !body){
+    alert("Fill everything!");
+    return;
+  }
+
+  await db.collection("stories").add({
+    title,
+    body,
+    who: storyWho,
+    date: new Date().toLocaleDateString()
   });
-  saveData(state); renderStories();
-  document.getElementById('storyTitle').value='';
-  document.getElementById('storyBody').value='';
-  document.getElementById('storyDate').value='';
-  showToast('Memory saved! 💖'); spawnConfetti();
+
+  loadStories();
 }
-function renderStories(){
+
+async function loadStories(){
   const list = document.getElementById('storyList');
-  list.innerHTML = '';
-  if(!state.stories.length){ list.innerHTML='<div class="empty-state">No stories yet — write your first one! 📖</div>'; return; }
-  state.stories.forEach(s => {
+  list.innerHTML = "";
+
+  const snapshot = await db.collection("stories").get();
+
+  snapshot.forEach(doc => {
+    const s = doc.data();
+
     const card = document.createElement('div');
-    card.className = `story-card by-${s.who}`;
+    card.className = 'story-card';
     card.innerHTML = `
-      <div class="story-meta">
-        <span class="story-author ${s.who}">${s.who==='her'?'🌹 Gizelle':'💛 Prince'}</span>
-        <span class="story-date">${s.date}</span>
-      </div>
-      <div class="story-title-disp">${s.title}</div>
-      <div class="story-body">${s.body.replace(/\n/g,'<br>')}</div>
-      <button class="story-like ${s.liked?'liked':''}">
-        ${s.liked?'❤️':'🤍'} ${s.likes} ${s.likes===1?'heart':'hearts'}
-      </button>
-      <button class="story-del" title="Delete">✕</button>
+      <strong>${s.title}</strong>
+      <p>${s.body}</p>
+      <small>${s.date}</small>
     `;
-    card.querySelector('.story-like').addEventListener('click', e => {
-      s.liked=!s.liked; s.likes+=s.liked?1:-1;
-      saveData(state); renderStories();
-      if(s.liked) spawnHearts(e.clientX, e.clientY);
-    });
-    card.querySelector('.story-del').addEventListener('click', () => {
-      if(!confirm('Delete this story?')) return;
-      state.stories = state.stories.filter(x=>x.id!==s.id);
-      saveData(state); renderStories();
-    });
+
     list.appendChild(card);
   });
 }
 
-// ── POEMS ─────────────────────────────────────────────────────
-function addPoem(){
-  const title = document.getElementById('poemTitle').value.trim();
-  const body  = document.getElementById('poemBody').value.trim();
-  if(!title||!body){ showToast('Please write a title and poem! ✍️'); return; }
-  state.poems.unshift({
-    id:Date.now(), title, body, who:poemWho,
-    date: new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})
+// ── POEMS (FIRESTORE) ────────────────────────────────────────
+async function addPoem(){
+  const title = document.getElementById('poemTitle').value;
+  const body  = document.getElementById('poemBody').value;
+
+  if(!title || !body){
+    alert("Fill everything!");
+    return;
+  }
+
+  await db.collection("poems").add({
+    title,
+    body,
+    who: poemWho,
+    date: new Date().toLocaleDateString()
   });
-  saveData(state); renderPoems();
-  document.getElementById('poemTitle').value='';
-  document.getElementById('poemBody').value='';
-  showToast('Poem published! 🌹'); spawnConfetti();
+
+  loadPoems();
 }
-function renderPoems(){
+
+async function loadPoems(){
   const list = document.getElementById('poemList');
-  list.innerHTML = '';
-  if(!state.poems.length){ list.innerHTML='<div class="empty-state">No poems yet — write the first verse! ✍️</div>'; return; }
-  state.poems.forEach(p => {
+  list.innerHTML = "";
+
+  const snapshot = await db.collection("poems").get();
+
+  snapshot.forEach(doc => {
+    const p = doc.data();
+
     const card = document.createElement('div');
     card.className = 'poem-card';
     card.innerHTML = `
-      <span class="poem-author-tag ${p.who}">${p.who==='her'?'🌹 Gizelle':'💛 Prince'} · ${p.date}</span>
-      <div class="poem-title-disp">${p.title}</div>
-      <div class="poem-body">${p.body}</div>
-      <button class="poem-del" title="Delete">✕</button>
+      <strong>${p.title}</strong>
+      <p>${p.body}</p>
+      <small>${p.date}</small>
     `;
-    card.querySelector('.poem-del').addEventListener('click', () => {
-      if(!confirm('Delete this poem?')) return;
-      state.poems = state.poems.filter(x=>x.id!==p.id);
-      saveData(state); renderPoems();
-    });
+
     list.appendChild(card);
   });
 }
 
-// ── HEARTS & CONFETTI ─────────────────────────────────────────
-document.getElementById('mainHeart').addEventListener('click', function(e){
-  for(let i=0;i<12;i++) spawnHeart(e.clientX+((Math.random()-.5)*40), e.clientY+((Math.random()-.5)*40));
-  spawnConfetti();
-});
-document.addEventListener('click', e=>{
-  if(e.target.closest('.hero')||e.target.id==='mainHeart') return;
-  if(Math.random()<0.25) spawnHeart(e.clientX, e.clientY);
-});
-function spawnHeart(x,y){
-  const h=document.createElement('div'); h.className='fheart';
-  h.textContent=['💖','💕','🌹','✨','💗'][Math.floor(Math.random()*5)];
-  h.style.cssText=`left:${x-10}px;top:${y-10}px;position:fixed;`;
-  document.body.appendChild(h); h.addEventListener('animationend',()=>h.remove());
-}
-function spawnHearts(x,y){ for(let i=0;i<8;i++) spawnHeart(x+((Math.random()-.5)*50), y+((Math.random()-.5)*50)); }
-function spawnConfetti(){
-  const colors=['#c94f6a','#c9973a','#f0d28a','#e8809a','#fff'];
-  for(let i=0;i<30;i++){
-    const c=document.createElement('div'); c.className='confetti-piece';
-    c.style.cssText=`left:${Math.random()*window.innerWidth}px;top:${window.scrollY+80}px;
-      background:${colors[Math.floor(Math.random()*colors.length)]};
-      animation:confettiFall ${1.5+Math.random()}s ease forwards;
-      transform:rotate(${Math.random()*360}deg);
-      width:${6+Math.random()*8}px;height:${6+Math.random()*8}px;
-      border-radius:${Math.random()>.5?'50%':'2px'};`;
-    document.body.appendChild(c); c.addEventListener('animationend',()=>c.remove());
-  }
-}
-
-// ── FALLING PETALS ────────────────────────────────────────────
-(function(){
-  const canvas=document.getElementById('petals'), ctx=canvas.getContext('2d');
-  let petals=[];
-  function resize(){ canvas.width=window.innerWidth; canvas.height=window.innerHeight; }
-  window.addEventListener('resize',resize); resize();
-  for(let i=0;i<30;i++) petals.push(mkPetal(true));
-  function mkPetal(rand){ return {x:Math.random()*canvas.width,y:rand?Math.random()*canvas.height:-20,r:4+Math.random()*7,vy:0.5+Math.random()*1,vx:(Math.random()-.5)*0.6,rot:Math.random()*360,rSpeed:(Math.random()-.5)*1.5,opacity:0.12+Math.random()*0.25,hue:330+Math.random()*20}; }
-  function draw(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    petals.forEach(p=>{
-      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot*Math.PI/180); ctx.globalAlpha=p.opacity;
-      ctx.beginPath(); ctx.ellipse(0,0,p.r,p.r*1.6,0,0,Math.PI*2);
-      ctx.fillStyle=`hsl(${p.hue},70%,80%)`; ctx.fill(); ctx.restore();
-      p.y+=p.vy; p.x+=p.vx; p.rot+=p.rSpeed;
-      if(p.y>canvas.height+20) Object.assign(p,mkPetal(false));
-    });
-    requestAnimationFrame(draw);
-  }
-  draw();
-})();
-
-// ── SCROLL REVEAL ─────────────────────────────────────────────
-const observer=new IntersectionObserver(entries=>entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); }),{threshold:0.1});
-document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
-
-// ── INIT ──────────────────────────────────────────────────────
-renderPhotos(); renderStories(); renderPoems();
+// ── INIT ─────────────────────────────────────────────────────
+loadPhotos();
+loadStories();
+loadPoems();
 </script>
-</body>
-</html>
